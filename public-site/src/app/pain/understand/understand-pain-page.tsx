@@ -1,35 +1,79 @@
 'use client';
 
 import { useState } from 'react';
-import { usePainProfile } from '@/components/pain/PainProfileProvider';
-import { PathwayRail } from '@/components/pain/PathwayNavigation';
 
 const factors = [
-  ['Body', 'Injury, illness, inflammation and physical conditions can contribute to pain.'],
-  ['Nervous system', 'The nerves, spinal cord and brain help detect, process and respond to potential threat. With persistent pain, this system can become more sensitive and protective.'],
-  ['Sleep', 'Pain can disrupt sleep, while poor sleep can also influence the experience of pain.'],
-  ['Movement', 'Movement, activity, strength and physical conditioning can influence function and pain.'],
-  ['Stress and emotions', 'Stress and emotions interact with the nervous system. That does not make pain less real.'],
-  ['Life and environment', 'Work, relationships, finances, social connection and access to healthcare can all matter.'],
-  ['Biology', 'Health conditions, genetics, age and other biological factors can contribute.'],
-  ['Experiences', 'Previous injuries, treatments and experiences can influence how the protective system responds.'],
+  ['Body', 'Injury, illness, inflammation and physical conditions can contribute to pain.', '◈', 'blue'],
+  ['Nervous system', 'Nerves, the spinal cord and brain help detect, process and respond to potential threat.', '✦', 'purple'],
+  ['Sleep', 'Pain can disrupt sleep, while poor sleep can also influence the experience of pain.', '☾', 'sky'],
+  ['Movement', 'Movement, activity, strength and physical conditioning can influence function and pain.', '↗', 'green'],
+  ['Stress & emotions', 'Stress and emotions interact with the nervous system. That does not make pain less real.', '∿', 'gold'],
+  ['Life & environment', 'Work, relationships, finances, social connection and access to healthcare all matter.', '⌂', 'teal'],
+  ['Biology', 'Health conditions, genetics, age and other biological factors can contribute.', '✣', 'coral'],
+  ['Experiences', 'Previous injuries, treatments and experiences can influence how the protective system responds.', '◷', 'sand'],
 ];
-const nav = [['01', 'Start here', 'top'], ['02', 'How pain persists', 'persists'], ['03', 'What influences pain', 'factors'], ['04', 'Map your pain', 'map'], ['05', 'Trusted resources', 'resources']];
+
+const nav = [
+  ['01', 'Start here', 'top'],
+  ['02', 'How pain persists', 'persists'],
+  ['03', 'What influences pain', 'factors'],
+  ['04', 'Map your pain', 'map'],
+  ['05', 'Trusted resources', 'resources'],
+];
 
 export default function UnderstandPainPage() {
-  const { profile, saveOnDevice, enableDeviceSave, updateProfile, clearProfile } = usePainProfile();
   const [activeFactor, setActiveFactor] = useState(0);
-  const [reflection, setReflection] = useState('');
   const [saved, setSaved] = useState(false);
-  const saveReflection = () => { if (!reflection.trim()) return; updateProfile({ ...profile, painSnapshot: { ...profile.painSnapshot, what: reflection.trim() } }); setSaved(true); };
-  const exportProfile = () => { const blob = new Blob([JSON.stringify(profile, null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob); const link = document.createElement('a'); link.href = url; link.download = 'tjr-pain-profile.json'; link.click(); URL.revokeObjectURL(url); };
-  return <main className="pain-page" id="top"><div className="pain-shell"><PathwayRail current={1}/><div className="pain-content">
-    <header className="pain-hero" id="start-here"><div className="profile-status"><span>My Pain Profile</span>{saveOnDevice ? <><small>Saved on this device</small><button onClick={exportProfile}>Export</button><button onClick={() => { if (window.confirm('Clear your saved Pain Profile from this device?')) clearProfile(); }}>Clear</button></> : <><small>Session only</small><button onClick={enableDeviceSave}>Save on this device</button></>}</div><div className="eyebrow"><span className="eyebrow-dot" /> A practical guide to persistent pain <span className="read-time">4 min read</span></div><h1>Understand<br /><em>your pain.</em></h1><p className="hero-lede">Pain is real. But pain isn’t always a measure of damage.</p><p className="hero-copy">Understanding what’s happening doesn’t make the pain disappear. It can help you make sense of your experience, communicate with your healthcare team and make more informed choices about managing it.</p><div className="hero-actions"><a href="#persists" className="button button-dark">Start with the basics <span>↓</span></a><span className="hero-footnote">Designed to read in one sitting.<br />Return whenever you need it.</span></div></header>
-    <section className="section-block" id="persists"><div className="section-kicker">01 / The starting point</div><div className="section-heading"><h2>Pain that persists<br /><em>is different.</em></h2><p>Persistent or chronic pain generally means pain lasting for three months or longer, or beyond the expected healing time.</p></div><div className="pain-paths"><div className="path-card acute"><div className="path-label">Acute pain <span>usually settles</span></div><div className="path-flow"><b>Something happens</b><i>→</i><b>Protection</b><i>→</i><b>Healing</b><i>→</i><strong>Pain settles</strong></div></div><div className="path-card persistent"><div className="path-label">Persistent pain <span>the system can change</span></div><div className="path-flow"><b>Something happens</b><i>→</i><b>Protection</b><i>→</i><b>Pain system changes</b><i>→</i><strong>Pain continues</strong></div></div></div><details className="explain-card"><summary>What does “the pain system changes” mean?</summary><p>With persistent pain, the nervous system can become more sensitive and protective. Signals that previously caused little or no pain may feel stronger, and the system can stay alert even after an injury has healed.</p><p>This doesn’t mean every person’s pain works the same way, or that an underlying condition no longer matters.</p></details><div className="scan-card"><div className="scan-card-icon">⌕</div><div><b>Why doesn’t my scan explain my pain?</b><p>Scans and tests can be important for diagnosing and monitoring health conditions. But they don’t directly measure how much pain someone experiences.</p><strong>A scan and a pain score answer different questions.</strong><p>Your symptoms, examination, medical history, investigations and the impact on your life all contribute to the clinical picture.</p></div></div><div className="truth-callout"><span className="callout-icon">!</span><div><b>Your pain is still real.</b><p>Changes in the pain system do not mean the pain is imagined or “all in your head.”</p></div></div></section>
-    <section className="section-block factors-section" id="factors"><div className="section-kicker">02 / The bigger picture</div><div className="section-heading"><h2>Pain is more than<br /><em>one signal.</em></h2><p>Explore the factors at your own pace. None of these has to be “the cause”; many people find several are playing a part.</p></div><div className="factor-layout"><div className="factor-wheel"><div className="wheel-ring" /><div className="wheel-center"><span>YOUR</span><b>PAIN<br />EXPERIENCE</b></div>{factors.map(([title], index) => <button key={title} className={`factor-chip chip-${['blue','purple','sky','green','gold','teal','coral','sand'][index]} ${activeFactor === index ? 'active' : ''}`} onClick={() => setActiveFactor(index)}><span>{['◈','✦','☾','↗','∿','⌂','✣','◷'][index]}</span>{title}</button>)}</div><div className="factor-detail"><div className="detail-index">0{activeFactor + 1} / 08</div><div className="detail-icon">{['◈','✦','☾','↗','∿','⌂','✣','◷'][activeFactor]}</div><h3>{factors[activeFactor][0]}</h3><p>{factors[activeFactor][1]}</p><div className="detail-hint">The goal isn’t to find one cause. It’s to notice what may be influencing your experience right now.</div></div></div></section>
-    <section className="stat-band"><div className="stat-heading">Pain in Australia · 2026</div><div><b>5.4M+</b><span>Australians live with chronic pain.</span></div><div><b>38%</b><span>of 2026 survey respondents reported developing chronic pain before age 25.</span></div><p>The 38% figure relates to respondents to the 2026 National Pain Survey — not 38% of all Australians with chronic pain.</p></section>
-    <section className="section-block map-section" id="map"><div className="section-kicker">03 / A small reflection</div><div className="section-heading"><h2>Map your pain,<br /><em>in your own words.</em></h2><p>You don’t need to complete a questionnaire. If it feels useful, write a few lines about where you feel pain, what it feels like, what changes it, how it affects life and what you’d most want back if it improved.</p></div><label className="reflection-field" htmlFor="pain-reflection"><span>My pain, in my own words</span><textarea id="pain-reflection" value={reflection} onChange={(event) => { setReflection(event.target.value); setSaved(false); }} placeholder="Write whatever feels useful. A few words is enough." rows={7} /></label><button className={`button button-accent ${saved ? 'saved' : ''}`} onClick={saveReflection}>{saved ? 'Saved to My Pain Profile ✓' : 'Save to My Pain Profile'} <span>→</span></button><p className="save-note">This is optional. Your words stay in this session unless you choose “Save on this device” above.</p></section>
-    <section className="resources-section" id="resources"><div className="section-kicker">04 / Keep exploring</div><div className="section-heading"><h2>Trusted<br /><em>resources.</em></h2><p><b>Choose what you need today.</b><br />You don’t have to understand everything at once.</p></div><div className="resource-list"><a href="https://www.healthdirect.gov.au/chronic-pain" target="_blank" rel="noreferrer"><span>🇦🇺 I want a straightforward overview</span><b>Healthdirect — Chronic pain<small>Australian information about chronic pain, symptoms, diagnosis, treatment and when to seek help.</small></b><i>↗</i></a><a href="https://www.painaustralia.org.au/about-pain/what-is-pain" target="_blank" rel="noreferrer"><span>🧠 I want to understand pain better</span><b>Painaustralia — What is pain?<small>Learn more about how persistent pain works and why everyone’s experience is different.</small></b><i>↗</i></a><a href="https://www.painaustralia.org.au/" target="_blank" rel="noreferrer"><span>🧭 I want practical help managing pain</span><b>Pathways to Pain Management<small>Structured Australian pain education and self-management resources.</small></b><i>↗</i></a></div></section>
-    <section className="next-step"><div className="progress-strip"></div><div className="next-step-copy"><div><div className="section-kicker">You’ve done 01</div><h2>Understanding your pain<br /><em>is the starting point.</em></h2><p>The next step is understanding who can help — and what each part of the Australian pain-care system actually does.</p></div><a className="button button-dark" href="/pain/care">02 — Find the right help <span>→</span></a></div></section><footer className="pain-footer"><div className="footer-mark">✦</div><div><b>TJR Mind &amp; Body</b><span>Mind. Body. Resilience.</span></div><p>This guide is for education and is not a substitute for medical advice, diagnosis or treatment. Speak with your GP or qualified healthcare professional about your situation.</p></footer>
-  </div></div></main>;
+
+  return (
+    <main className="pain-page" id="top">
+      <div className="pain-shell">
+        <aside className="pain-rail" aria-label="Guide sections">
+          <div className="rail-brand"><span className="brand-mark">✦</span><span>TJR<br /><b>Mind &amp; Body</b></span></div>
+          <div className="rail-line" />
+          <nav>{nav.map(([number, label, href]) => <a href={`#${href}`} key={href}><span>{number}</span>{label}</a>)}</nav>
+          <div className="rail-note">Living well with persistent pain<br /><b>— an Australian guide</b></div>
+        </aside>
+
+        <div className="pain-content">
+          <header className="pain-hero" id="start-here">
+            <div className="eyebrow"><span className="eyebrow-dot" /> A practical guide to persistent pain <span className="read-time">4 min read</span></div>
+            <h1>Understand<br /><em>your pain.</em></h1>
+            <p className="hero-lede">Pain is real. But pain isn’t always a measure of damage.</p>
+            <p className="hero-copy">Understanding what’s happening doesn’t make the pain disappear. But it can help you make sense of your experience, communicate with your healthcare team and make more informed choices about managing it.</p>
+            <div className="hero-actions"><a href="#persists" className="button button-dark">Start with the basics <span>↓</span></a><span className="hero-footnote">Designed to read in one sitting.<br />Useful to return to when you need it.</span></div>
+          </header>
+
+          <section className="section-block" id="persists">
+            <div className="section-kicker">01 / The starting point</div>
+            <div className="section-heading"><h2>Pain that persists<br /><em>is different.</em></h2><p>Persistent or chronic pain generally means pain lasting for three months or longer, or beyond the expected healing time.</p></div>
+            <div className="pain-paths">
+              <div className="path-card acute"><div className="path-label">Acute pain <span>usually settles</span></div><div className="path-flow"><b>Something happens</b><i>→</i><b>Protection</b><i>→</i><b>Healing</b><i>→</i><strong>Pain settles</strong></div></div>
+              <div className="path-card persistent"><div className="path-label">Persistent pain <span>the system can change</span></div><div className="path-flow"><b>Something happens</b><i>→</i><b>Protection</b><i>→</i><b>Pain system changes</b><i>→</i><strong>Pain continues</strong></div></div>
+            </div>
+            <div className="truth-callout"><span className="callout-icon">!</span><div><b>Your pain is still real.</b><p>Changes in the pain system do not mean the pain is imagined or “all in your head.”</p></div></div>
+          </section>
+
+          <section className="section-block factors-section" id="factors">
+            <div className="section-kicker">02 / The bigger picture</div>
+            <div className="section-heading"><h2>Pain is more than<br /><em>one signal.</em></h2><p>Different factors can turn the volume up or down. Tap a factor to see how it can shape your pain experience.</p></div>
+            <div className="factor-layout"><div className="factor-wheel"><div className="wheel-ring" /><div className="wheel-center"><span>YOUR</span><b>PAIN<br />EXPERIENCE</b></div>{factors.map(([title, detail, icon, color], index) => <button key={title} className={`factor-chip chip-${color} ${activeFactor === index ? 'active' : ''}`} onClick={() => setActiveFactor(index)}><span>{icon}</span>{title}</button>)}</div><div className="factor-detail"><div className="detail-index">0{activeFactor + 1} / 08</div><div className="detail-icon">{factors[activeFactor][2]}</div><h3>{factors[activeFactor][0]}</h3><p>{factors[activeFactor][1]}</p><div className="detail-hint">The goal isn’t to find one cause. It’s to notice what may be influencing your experience right now.</div></div></div>
+          </section>
+
+          <section className="stat-band"><div><b>5.4M+</b><span>Australians live with chronic pain.</span></div><div><b>38%</b><span>of 2026 survey respondents reported developing chronic pain before age 25.</span></div><p>The 38% figure relates to respondents to the 2026 National Pain Survey — not 38% of all Australians with chronic pain.</p></section>
+
+          <section className="section-block map-section" id="map">
+            <div className="section-kicker">03 / Turn knowledge into something useful</div>
+            <div className="section-heading"><h2>Map your pain.<br /><em>Not just a number.</em></h2><p>A 0–10 pain score tells your healthcare team one thing. Your pain story tells them much more.</p></div>
+            <div className="map-grid">{[['Where?', 'Where do you experience pain?'], ['What?', 'Burning · aching · stabbing · shooting'], ['When?', 'Constant · intermittent · during activity'], ['What changes it?', 'Movement · rest · sleep · stress'], ['What does it affect?', 'Sleep · work · mood · relationships'], ['What matters most?', 'If one part of life improved, what would you choose?']].map(([title, prompt]) => <label key={title}><span>{title}</span><p>{prompt}</p><input aria-label={title} placeholder="Write a few words…" /></label>)}</div>
+            <button className={`button button-accent ${saved ? 'saved' : ''}`} onClick={() => setSaved(true)}>{saved ? 'Pain Snapshot started ✓' : 'Create my Pain Snapshot'} <span>→</span></button>
+          </section>
+
+          <section className="resources-section" id="resources"><div className="section-kicker">04 / Keep exploring</div><div className="section-heading"><h2>Trusted<br /><em>resources.</em></h2><p>You don’t have to understand everything at once. Start with the source that fits the question you have today.</p></div><div className="resource-list"><a href="https://www.healthdirect.gov.au/chronic-pain" target="_blank" rel="noreferrer"><span>Healthdirect</span><b>Chronic pain</b><i>↗</i></a><a href="https://www.painaustralia.org.au/about-pain/what-is-pain" target="_blank" rel="noreferrer"><span>Painaustralia</span><b>What is pain?</b><i>↗</i></a><a href="https://www.painaustralia.org.au/" target="_blank" rel="noreferrer"><span>Pathways to Pain Management</span><b>Find support in Australia</b><i>↗</i></a></div></section>
+
+          <footer className="pain-footer"><div className="footer-mark">✦</div><div><b>TJR Mind &amp; Body</b><span>Mind. Body. Resilience.</span></div><p>This guide is for education and is not a substitute for medical advice, diagnosis or treatment. Speak with your GP or qualified healthcare professional about your situation.</p></footer>
+        </div>
+      </div>
+    </main>
+  );
 }
