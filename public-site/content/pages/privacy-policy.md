@@ -14,9 +14,9 @@ Basic website usage information may also be collected automatically, such as bro
 
 ## How information may be used
 
-Information may be used to respond to enquiries, provide support, communicate about coaching or education services, improve the website, and keep basic records of communications.
+Information may be used to respond to enquiries, provide support, communicate about awareness, advocacy and ways to get involved, improve the website, and keep basic records of communications.
 
-TJR Mind & Body is positioned as a coaching and education brand focused on practical resilience, support, self-management, and rebuilding. Personal information is not collected for clinical or treatment purposes through this site.
+TJR Mind & Body is positioned as a chronic pain awareness and advocacy initiative that shares educational and self-advocacy information. Personal information is not collected for clinical or treatment purposes through this site.
 
 ## Storage and security
 

@@ -18,13 +18,12 @@ export default function ComingSoonPage() {
           </div>
 
           <div className="mt-10 max-w-3xl">
-            <h1 className="font-serif text-5xl font-bold leading-[0.95] tracking-tight text-navy sm:text-6xl md:text-7xl">Build practical resilience, together</h1>
+            <h1 className="font-serif text-5xl font-bold leading-[0.95] tracking-tight text-navy sm:text-6xl md:text-7xl">Be heard. Be understood. Be prepared.</h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-ink-mid sm:text-xl">
-              Coaching and educational resources grounded in lived experience, kept simple and at a slower pace. Start by noticing what needs more care,
-              then build from there one step at a time.
+              Chronic pain awareness and advocacy, grounded in lived experience: helping people be heard, and helping others understand.
             </p>
             <p className="mt-6 max-w-2xl border-l-4 border-teal pl-4 text-base font-semibold leading-7 text-navy">
-              TJR Mind & Body is still being built, and the work will keep changing as it grows.
+              TJR Mind & Body is still being built, and it will keep changing as it grows.
             </p>
           </div>
         </section>

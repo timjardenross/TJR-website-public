@@ -13,7 +13,18 @@ export const guardedFiles = [
   'src/components/SiteHeader.tsx',
   'src/components/SiteFooter.tsx',
   'src/lib/nav.ts',
+  'src/app/page.tsx',
+  'src/app/coming-soon/page.tsx',
+  'src/lib/site.ts',
+  'content/pages/about.md',
+  'content/pages/privacy-policy.md',
+  'content/pages/terms-conditions.md',
 ];
+
+// Legal pages legitimately say "no guarantee", "not ... cure" and "clinical", so the
+// cure/promise check covers marketing copy only.
+const legalPages = ['content/pages/privacy-policy.md', 'content/pages/terms-conditions.md'];
+const marketingFiles = guardedFiles.filter((file) => !legalPages.includes(file));
 
 const allowedDisclaimer = /does not claim to cure or treat any condition/gi;
 
@@ -26,7 +37,7 @@ describe('advocacy copy guard', () => {
     expect(read(file)).not.toMatch(/\bcoach/i);
   });
 
-  it.each(guardedFiles)('%s contains no cure or treatment promises', (file) => {
+  it.each(marketingFiles)('%s contains no cure or treatment promises', (file) => {
     const text = read(file).replace(allowedDisclaimer, '');
     expect(text).not.toMatch(/\b(cure|heal your|guarantee)/i);
   });
@@ -38,7 +49,16 @@ describe('advocacy copy guard', () => {
     expect(form).toContain("useState('share-experience')");
   });
 
-  it('names no hospital or clinician in page content', () => {
-    expect(read('content/pages/get-involved.md')).not.toMatch(/hospital|clinic|\bDr\.? /i);
+  it.each(['get-involved', 'about', 'privacy-policy', 'terms-conditions'])(
+    'names no hospital or clinician in %s page content',
+    (slug) => {
+      expect(read(`content/pages/${slug}.md`)).not.toMatch(/\bhospital\b|\bclinic\b|\bDr\.? /i);
+    },
+  );
+
+  it('states the positioning line in site.ts', () => {
+    expect(read('src/lib/site.ts')).toContain(
+      'Chronic pain awareness and advocacy: helping people be heard, and helping others understand.',
+    );
   });
 });

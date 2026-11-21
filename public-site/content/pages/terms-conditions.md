@@ -8,7 +8,7 @@ These terms describe the general basis on which people use the TJR Mind & Body w
 
 ## Purpose of the website
 
-TJR Mind & Body is a practical resilience coaching and education brand. The website is intended to share information about support, coaching, education, practical resilience, self-management, and rebuilding.
+TJR Mind & Body is a chronic pain awareness and advocacy initiative run by an individual. The website is intended to share information about awareness, self-advocacy, practical tools, and ways to get involved.
 
 ## General information only
 
