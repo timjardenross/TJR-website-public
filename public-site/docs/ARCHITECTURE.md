@@ -5,8 +5,9 @@
 `public-site/` is a standalone Next.js 14 (App Router) application, separate
 from `lcars-portal/` (the internal, Captain-only command portal). It is the
 canonical public publishing platform for TJR Mind & Body: a Git-based CMS
-(Sveltia CMS) authors Markdown content directly into this repository, and
-Vercel deploys a statically generated site on every push.
+(Pages CMS) edits Markdown content directly in this repository, on a branch
+merged by pull request, and Vercel deploys a statically generated site on
+every merge.
 
 ```
 public-site/
@@ -15,9 +16,6 @@ public-site/
     discover-capacity-codes/  # Private prototype access codes, not public content
     pages/                  # Flat standalone pages (About, Let's Chat, ...)
   public/
-    admin/                  # Sveltia CMS (static, no build step)
-      index.html
-      config.yml
     uploads/                # CMS-uploaded media, committed to Git
   src/
     app/                    # Routes (see below)
@@ -44,7 +42,7 @@ fast, and publicly cacheable). Keeping them as separate Next.js apps means:
 - No shared auth boundary to reason about — the public site has none; the
   internal portal is fully gated.
 
-The public app now lives in the `timjardenross/tjrmindbody_public`
+The public app now lives in the `timjardenross/TJR-website-public`
 repository, with GitHub as the canonical source of truth for content,
 media and CMS configuration.
 
@@ -61,7 +59,7 @@ top-level navigation.
 Adding a truly separate collection later means:
 
 1. Add one entry to `collections` in `src/lib/collections.ts`.
-2. Add a matching block to `public/admin/config.yml`.
+2. Add a matching block to `.pages.yml` (repo root).
 3. Create `content/<new-collection>/`.
 
 No route, component or rendering code needs to change: the dynamic
@@ -121,8 +119,8 @@ the exact reserved-slug list.
 ## Rendering strategy: SSG, not ISR
 
 All content routes are statically generated at build time
-(`generateStaticParams`). Because publishing goes through Git (CMS commit →
-GitHub → Vercel build), every publish already triggers a fresh, full
+(`generateStaticParams`). Because publishing goes through Git (branch → pull request →
+merge → Vercel build), every publish already triggers a fresh, full
 deployment — there is no scenario where content changes without a rebuild.
 Incremental Static Regeneration would only help if content could change
 *without* a new deploy (e.g. a database-backed CMS), which is explicitly
@@ -139,10 +137,9 @@ override, noindex) — see `public-site/docs/PUBLISHING-GUIDE.md`.
 
 ## CMS integration
 
-See `CMS-SETUP.md` for the full GitHub OAuth App setup. In short: Sveltia
-CMS (`public/admin`) is a static, client-side editor loaded from a CDN
-(no build step, no server component of its own). It commits Markdown files
-straight into `public-site/content/<collection>/` on the `main` branch via
-the GitHub API, authenticated through a small self-hosted OAuth proxy at
-`src/app/api/auth/route.ts` (replacing what Netlify Identity/Git Gateway
-would have provided).
+See `CMS-SETUP.md`. In short: Pages CMS (`app.pagescms.org`) is a hosted,
+open-source editor that works directly on the Markdown files in this
+repository. It is configured by one file, `.pages.yml`, at the repo root. The
+website has no CMS code, login route or secrets of its own. Because `main` is
+protected, edits are saved to a branch and merged by pull request after the
+`test-and-build` check passes.

@@ -1,136 +1,86 @@
 # Publishing Guide
 
-This is for whoever is writing content — no code or Git knowledge required
-beyond logging in.
+This is for whoever is writing content. You do not need to know code or Git, but
+you do need a GitHub account with access to the repository. Posts are edited in
+[Pages CMS](https://pagescms.org) (see `CMS-SETUP.md` for connecting it).
 
-## Logging in
+## Writing a blog post
 
-Go to `<site-url>/admin` and sign in with GitHub (see `CMS-SETUP.md` if
-this is the very first login and the OAuth App isn't configured yet).
-
-## Creating a Library item
-
-1. Pick **Library** in the left sidebar.
-2. Click **New Library Item**.
+1. Open the repository in Pages CMS and pick your working **branch** (not `main`;
+   see "Saving and publishing" below).
+2. Open **Blog posts**, then click **Add an entry**.
 3. Fill in:
    - **Title** — required.
    - **Date** — used for sorting and the published date shown on the page.
-   - **Draft** — checked by default. While checked, the article is saved
-     but **not shown on the public site**. Uncheck it to publish.
-   - **Excerpt** — 1–2 sentences. Shown on listing cards, in search results,
-     and as the fallback social-share description.
-   - **Content type** — Article, Guide, Resource, Visual Explainer,
-     Worksheet, Poster, Carousel, Video Script or Presentation Script.
-     This replaces the old separate Blog/Guides/Resources collections.
-   - **Journey stage** — where the item fits in the REVS ecosystem:
-     Discover, Profile, Build, Track, Grow, Coach-Supported Growth or
-     Library of Resources.
-   - **REVS Pillar** — optional, picked from Resilience, Emotion, Vitality
-     or Stability.
-   - **Capacity systems** — optional multi-select covering the 12 capacity
-     systems from the REVS Creative Bible.
-   - **REVS poster class** and **Icon family** — optional Creative Bible
-     production metadata for visual explainers, posters and design assets.
-   - **Tags** — optional, used for tag pages, related articles and search.
-   - **Featured image** — optional; upload directly in the editor.
-   - **Attachment** — optional; upload a PDF or other downloadable file
-     directly in the editor. Adds a Download button to the page.
-     **Attachment label** sets the button text.
-   - **Body** — the article itself, written in the Markdown editor (bold,
-     headings, lists, links, images, quotes, tables all supported). Use
-     `##`/`###` headings — they automatically populate the on-page table of
-     contents.
-4. Click **Save** to save a draft, or **Publish** to commit it live.
+   - **Draft** — on by default. While it is on, the post is saved but **not shown
+     on the public site**. Turn it off to publish.
+   - **Summary** — one or two plain sentences. Shown on listing cards, in search
+     results, and as the fallback social-share description.
+   - **Tags** — optional, used for tag pages, related posts and search.
+   - **Main image** and **Main image description** — optional. Describe the image
+     for people who cannot see it.
+   - **Author** — filled in for you.
+   - **Search and sharing** — optional **Search description** (overrides the
+     summary for search engines) and **Hide from search engines**.
+   - **Post** — the post itself, in the rich-text editor. Use headings (they
+     build the on-page table of contents), lists, links, quotes and images. The
+     **Source** view shows the underlying Markdown if you want it.
+4. Save. This commits the post to your branch.
 
-## Publishing = a Git commit
+## Saving and publishing
 
-Every Save/Publish action in the CMS commits directly to the `main` branch
-of the `timjardenross/tjrmindbody_public` repository. That push triggers an
-automatic deployment — **there is no separate "deploy" step**. A published article is
-typically live within a minute or two of clicking Publish.
+`main` is protected: pull requests are required and the `test-and-build` check
+must pass, so Pages CMS cannot save straight to `main`.
 
-## Editing an existing Library item
+1. **Save on a branch.** Every save is a commit on the branch you chose in Pages CMS.
+2. **Open a pull request** on GitHub from that branch into `main` when you are ready.
+3. **Wait for the checks**, then **merge**. The site rebuilds and deploys. There is no
+   separate "deploy" step, and a published post is typically live within a minute or
+   two of merging.
+4. Keep **Draft** on until the moment you want the post public.
 
-Open the collection in the sidebar, click the entry, edit, **Publish**
-again. This creates a new commit — full history is kept in Git, so any past
-version can be recovered (see `DISASTER-RECOVERY.md`).
+Every change is a Git commit, so full history is kept and any past version can be
+recovered (see `DISASTER-RECOVERY.md`).
 
-## Curating Instagram highlights
+## Editing an existing post
 
-The **Instagram Highlights** collection is for selected posts from
-`@tjrmindbody`. It is not a live feed and does not use Instagram's API,
-which keeps the homepage fast and avoids fragile third-party dependencies.
-
-1. Pick **Instagram Highlights** in the CMS sidebar.
-2. Click **New Instagram Highlight**.
-3. Paste the public Instagram post or reel URL.
-4. Add a short site-friendly caption.
-5. Optionally upload a square preview image or screenshot. If you skip this,
-   the homepage uses a branded text card instead.
-6. Use **Display order** if you want a specific order. Lower numbers appear
-   first.
-7. Keep **Active** on to show it, or turn it off to hide the highlight
-   without deleting it.
-
-The homepage and Library page show up to three active highlights and link
-each one back to Instagram.
+Open **Blog posts**, click the entry, edit and save on a branch, then open a pull
+request as above.
 
 ## Images
 
-Upload images directly in the **Featured image** field or inline in the
-Markdown body via the editor's image button. Uploads are committed into the
-repo under `public-site/public/uploads/` and served from `/uploads/...` —
-no external image host or subscription required.
+Upload images in the **Main image** field or with the editor's image button. Uploads
+are committed into the repo under `public-site/public/uploads/` and served from
+`/uploads/...`, with no external image host.
 
-## SEO metadata
+## Standalone pages, Instagram highlights and access codes
 
-Every article and page has an optional **SEO** section (collapsed by
-default):
+These are not in the editor. Edit the Markdown files directly on a branch and merge
+through a pull request:
 
-- **SEO title override** — overrides the `<title>` tag only, leaving the
-  on-page heading as the main Title.
-- **Meta description** — overrides the excerpt for search engines/social
-  previews if you want something different from the on-page excerpt.
-- **Canonical URL** — only needed if this content is also published
-  elsewhere and you want search engines to credit the other URL.
-- **Social share image override** — overrides the featured image
-  specifically for Open Graph/Twitter card previews.
-- **Hide from search engines** — sets `noindex`. Use for thank-you pages or
-  anything that shouldn't rank.
+- **Standalone pages**: `public-site/content/pages/` (for example `about.md`
+  becomes `/about`). They have no categories, tags or related-posts sidebar.
+- **Instagram highlights**: `public-site/content/instagram-highlights/`. Each file is a
+  selected post, not a live feed. Set `active: false` to hide one without deleting it.
+  The homepage and Library page show up to three active highlights.
+- **Discover Your Capacity access codes**: `public-site/content/discover-capacity-codes/`.
 
-If you leave the SEO section untouched, sensible defaults are used
-automatically (Title, Excerpt, and Featured image).
+**Reserved names** — a few slugs are off-limits because the site already uses that
+URL for something else:
 
-## Standalone pages
+- Any post slug of exactly `rss.xml` — that URL is the collection's own RSS feed.
+- A **standalone page** slug cannot be `admin`, `search`, `search-index.json`,
+  `rss.xml`, `sitemap.xml`, `robots.txt`, or a collection name such as `library`.
+  Those routes always take priority, so a colliding page would silently never appear.
 
-The **Pages** collection is for pages that aren't dated articles — About,
-Coaching, Let's Chat, etc. These publish at the root of the site
-(`content/pages/about.md` → `/about`) and don't have categories, tags, or a
-reading-time/related-articles sidebar.
+If you hit one of these the file still saves, but it will not appear on the live site,
+and a build-log warning names the file to rename.
 
-**Reserved names** — a few slugs/titles-that-become-slugs are off-limits
-because the site already uses that URL for something else:
+## Tags and search
 
-- Any article slug of exactly `rss.xml` (within any collection) — that URL
-  is always the collection's own RSS feed.
-- A **Pages** slug can't match `admin`, `search`, `search-index.json`,
-  `rss.xml`, `sitemap.xml`, `robots.txt`, or any collection name
-  (`library`) — those routes always take priority, so a colliding page
-  would silently never appear.
+Tags are not managed in a separate list. A new tag is created the first time you type
+it into a post. Tag pages and the sitewide `/search` page pick up new values on the
+next deploy with no extra step.
 
-If you accidentally hit one of these, the content still saves in the CMS —
-it just won't appear on the live site, and a build-log warning will name
-the file to rename.
-
-## Content types, tags and search
-
-Content types and REVS metadata are fixed lists rather than free text. This
-is deliberate: it stops filter pages from splintering into near-duplicates
-over time, while still letting the one Library hold articles, guides,
-resources, posters and visual explainers together. To add or change an
-option, edit the Library fields in `public/admin/config.yml`.
-
-Tags, by contrast, aren't managed in a separate list — they're created
-automatically the first time you type a new one into a Library item. Tag
-filter pages and the sitewide `/search` page pick up new values on the next
-deploy with no extra step.
+Older posts may carry extra front-matter fields that the short form does not show.
+They are kept when you save.
