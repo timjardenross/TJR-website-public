@@ -68,7 +68,8 @@ export default function HomePage() {
                 If that sounds like you, you are not doing it wrong, and you are not alone.
               </p>
               <p>
-                This site is an individual voice, built to help people be heard and better prepared to speak up. Tim&apos;s story is coming soon.
+                This site is an individual voice, built to help people be heard and better prepared to speak up.{' '}
+                <Link href="/my-story" className="font-semibold text-blue hover:underline">Read Tim&apos;s story</Link>.
               </p>
             </div>
             <Link href="/about" className="mt-6 inline-flex rounded-lg border border-navy/20 px-5 py-3 text-sm font-semibold text-navy hover:border-teal">
