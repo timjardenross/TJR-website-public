@@ -45,7 +45,7 @@ export default function HomePage() {
             <Link href="/library" className="rounded-lg bg-navy px-6 py-3 text-sm font-semibold text-white hover:bg-navy-deep">
               Explore the Library
             </Link>
-            <Link href="/lets-chat" className="rounded-lg border border-navy/20 bg-white px-6 py-3 text-sm font-semibold text-navy hover:border-teal">
+            <Link href="/get-involved" className="rounded-lg border border-navy/20 bg-white px-6 py-3 text-sm font-semibold text-navy hover:border-teal">
               Let&apos;s Chat
             </Link>
           </div>
@@ -108,7 +108,7 @@ export default function HomePage() {
             ))}
           </div>
           <div className="border-t border-border px-7 py-5">
-            <Link href="/approach" className="text-sm font-semibold text-blue hover:underline">
+            <Link href="/about" className="text-sm font-semibold text-blue hover:underline">
               See the approach and Resilience Cycle
             </Link>
           </div>
@@ -129,7 +129,7 @@ export default function HomePage() {
               <Link href="/library" className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-navy hover:bg-blue-pale">
                 Visit Library
               </Link>
-              <Link href="/lets-chat" className="rounded-lg border border-white/25 px-5 py-3 text-center text-sm font-semibold text-white hover:border-teal">
+              <Link href="/get-involved" className="rounded-lg border border-white/25 px-5 py-3 text-center text-sm font-semibold text-white hover:border-teal">
                 Let&apos;s Chat
               </Link>
             </div>

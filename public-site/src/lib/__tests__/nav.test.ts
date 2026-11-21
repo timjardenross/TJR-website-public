@@ -26,8 +26,7 @@ function knownRoutes(): Set<string> {
 const allLinks = [...navLinks, ctaLink, ...footerLinks];
 
 describe('navigation', () => {
-  // enabled in Task 4 (route /get-involved is created there)
-  it.skip('nav, cta and footer hrefs all resolve to an existing route', () => {
+  it('nav, cta and footer hrefs all resolve to an existing route', () => {
     const routes = knownRoutes();
     for (const link of allLinks) {
       expect(routes.has(link.href), `${link.label} -> ${link.href}`).toBe(true);

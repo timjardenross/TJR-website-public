@@ -5,7 +5,7 @@ import { FormEvent, useState } from 'react';
 export function ContactForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [inquiry, setInquiry] = useState('coaching');
+  const [inquiry, setInquiry] = useState('share-experience');
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [responseMessage, setResponseMessage] = useState('');
@@ -26,7 +26,7 @@ export function ContactForm() {
         setResponseMessage("Thanks for reaching out. We'll reply within 2 business days.");
         setName('');
         setEmail('');
-        setInquiry('coaching');
+        setInquiry('share-experience');
         setMessage('');
       } else {
         setStatus('error');
@@ -42,7 +42,7 @@ export function ContactForm() {
     <div className="max-w-2xl rounded-[34px] border border-border bg-white p-8">
       <h2 className="mb-2 font-serif text-2xl font-bold text-navy">Get in touch</h2>
       <p className="mb-6 text-ink-mid">
-        For coaching, support, education, or collaboration enquiries, use the form below or email support@tjrmindbody.com.
+        To share your experience, volunteer, or work together on chronic pain awareness, use the form below or email support@tjrmindbody.com.
       </p>
 
       {status === 'success' ? (
@@ -91,11 +91,11 @@ export function ContactForm() {
               onChange={(e) => setInquiry(e.target.value)}
               className="w-full rounded-lg border border-border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-teal"
             >
-              <option value="coaching">Coaching</option>
-              <option value="support">Support</option>
-              <option value="education">Education</option>
-              <option value="collaboration">Collaboration</option>
-              <option value="other">Other</option>
+              <option value="share-experience">Share my experience</option>
+              <option value="volunteer">Volunteer or help out</option>
+              <option value="collaborate">Collaborate or partner</option>
+              <option value="media">Media or speaking</option>
+              <option value="other">Something else</option>
             </select>
           </div>
 
