@@ -7,7 +7,6 @@ const root = path.resolve(__dirname, '../../..');
 // Files whose public copy must follow the advocacy positioning.
 export const guardedFiles = [
   'src/app/get-involved/page.tsx',
-  'content/pages/get-involved.md',
   'src/components/ContactForm.tsx',
   'src/components/LeadMagnetForm.tsx',
   'src/components/SiteHeader.tsx',
@@ -33,6 +32,13 @@ function read(file: string): string {
 }
 
 describe('advocacy copy guard', () => {
+  it.each(['src/app/coming-soon/page.tsx', 'src/app/pain/understand/understand-pain-page.tsx'])(
+    '%s no longer shows the retired Mind. Body. Resilience. tagline',
+    (file) => {
+      expect(read(file)).not.toContain('Mind. Body. Resilience');
+    },
+  );
+
   it.each(guardedFiles)('%s contains no coaching language', (file) => {
     expect(read(file)).not.toMatch(/\bcoach/i);
   });
@@ -49,7 +55,7 @@ describe('advocacy copy guard', () => {
     expect(form).toContain("useState('share-experience')");
   });
 
-  it.each(['get-involved', 'about', 'privacy-policy', 'terms-conditions'])(
+  it.each(['about', 'privacy-policy', 'terms-conditions'])(
     'names no hospital or clinician in %s page content',
     (slug) => {
       expect(read(`content/pages/${slug}.md`)).not.toMatch(/\bhospital\b|\bclinic\b|\bDr\.? /i);

@@ -14,7 +14,7 @@ export default function ComingSoonPage() {
         <section className="w-full rounded-[2rem] border border-navy/10 bg-white/90 p-8 shadow-sm backdrop-blur md:p-12">
           <div className="flex flex-col items-start gap-4 md:flex-row md:items-center md:justify-between">
             <Image src="/brand/logo.svg" alt="TJR Mind & Body mark" width={96} height={96} priority />
-            <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-teal">Mind. Body. Resilience.</p>
+            <p className="text-xs font-extrabold uppercase tracking-[0.18em] text-teal">Chronic pain awareness and advocacy</p>
           </div>
 
           <div className="mt-10 max-w-3xl">

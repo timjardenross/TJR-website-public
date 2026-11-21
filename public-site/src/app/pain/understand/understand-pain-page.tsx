@@ -69,7 +69,7 @@ export default function UnderstandPainPage() {
 
           <section className="resources-section" id="resources"><div className="section-kicker">04 / Keep exploring</div><div className="section-heading"><h2>Trusted<br /><em>resources.</em></h2><p>You don’t have to understand everything at once. Start with the source that fits the question you have today.</p></div><div className="resource-list"><a href="https://www.healthdirect.gov.au/chronic-pain" target="_blank" rel="noreferrer"><span>Healthdirect</span><b>Chronic pain</b><i>↗</i></a><a href="https://www.painaustralia.org.au/about-pain/what-is-pain" target="_blank" rel="noreferrer"><span>Painaustralia</span><b>What is pain?</b><i>↗</i></a><a href="https://www.painaustralia.org.au/" target="_blank" rel="noreferrer"><span>Pathways to Pain Management</span><b>Find support in Australia</b><i>↗</i></a></div></section>
 
-          <footer className="pain-footer"><div className="footer-mark">✦</div><div><b>TJR Mind &amp; Body</b><span>Mind. Body. Resilience.</span></div><p>This guide is for education and is not a substitute for medical advice, diagnosis or treatment. Speak with your GP or qualified healthcare professional about your situation.</p></footer>
+          <footer className="pain-footer"><div className="footer-mark">✦</div><div><b>TJR Mind &amp; Body</b><span>Chronic pain awareness and advocacy</span></div><p>This guide is for education and is not a substitute for medical advice, diagnosis or treatment. Speak with your GP or qualified healthcare professional about your situation.</p></footer>
         </div>
       </div>
     </main>
