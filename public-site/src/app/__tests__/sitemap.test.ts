@@ -16,6 +16,12 @@ describe('sitemap', () => {
     expect(urls).toContain(`${site.url}/terms-conditions`);
   });
 
+  it('includes the story and story-handling pages', () => {
+    const urls = entries.map((e) => e.url);
+    expect(urls).toContain(`${site.url}/my-story`);
+    expect(urls).toContain(`${site.url}/story-and-consent`);
+  });
+
   it('excludes the internal search page', () => {
     const urls = entries.map((e) => e.url);
     expect(urls).not.toContain(`${site.url}/search`);

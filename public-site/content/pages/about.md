@@ -10,7 +10,7 @@ I'm Tim. I have lived with chronic pain for most of my life, and I work in opera
 
 My aim is simple: help people with persistent pain be heard, be better prepared to speak up, and be better understood by the people around them.
 
-My own story is coming to this site soon.
+You can read [my story](/my-story), and see [how stories are handled](/story-and-consent) on this site.
 
 ---
 

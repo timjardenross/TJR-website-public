@@ -39,6 +39,10 @@ describe('navigation', () => {
     }
   });
 
+  it('lists My Story in the primary nav', () => {
+    expect(navLinks.some((link) => link.href === '/my-story')).toBe(true);
+  });
+
   it('keeps the pain pathway in the primary nav', () => {
     expect(navLinks.some((link) => link.href === '/pain/understand')).toBe(true);
   });

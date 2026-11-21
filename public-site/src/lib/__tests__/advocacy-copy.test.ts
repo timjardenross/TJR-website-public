@@ -62,6 +62,18 @@ describe('advocacy copy guard', () => {
     },
   );
 
+  it('homepage and About no longer say the story is coming soon', () => {
+    for (const file of ['src/app/page.tsx', 'content/pages/about.md']) {
+      expect(read(file), file).not.toMatch(/story is coming|coming to this site soon|coming soon/i);
+    }
+  });
+
+  it('homepage and About link to the story, and About links to the consent page', () => {
+    expect(read('src/app/page.tsx')).toContain('href="/my-story"');
+    expect(read('content/pages/about.md')).toContain('(/my-story)');
+    expect(read('content/pages/about.md')).toContain('(/story-and-consent)');
+  });
+
   it('states the positioning line in site.ts', () => {
     expect(read('src/lib/site.ts')).toContain(
       'Chronic pain awareness and advocacy: helping people be heard, and helping others understand.',
