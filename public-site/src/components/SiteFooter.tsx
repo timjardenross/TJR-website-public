@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { site } from '@/lib/site';
+import { footerLinks } from '@/lib/nav';
 
 export function SiteFooter() {
   return (
@@ -17,21 +18,11 @@ export function SiteFooter() {
             &copy; {site.name}. All rights reserved.
           </p>
           <div className="flex gap-4">
-            <Link href="/privacy-policy" className="hover:text-teal">
-              Privacy
-            </Link>
-            <Link href="/terms-conditions" className="hover:text-teal">
-              Terms
-            </Link>
-            <Link href="/library/rss.xml" className="hover:text-teal">
-              RSS
-            </Link>
-            <Link href="/sitemap.xml" className="hover:text-teal">
-              Sitemap
-            </Link>
-            <Link href="/lets-chat" className="hover:text-teal">
-              Let&apos;s Chat
-            </Link>
+            {footerLinks.map((link) => (
+              <Link key={link.href} href={link.href} className="hover:text-teal">
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
