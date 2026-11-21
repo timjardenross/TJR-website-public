@@ -109,7 +109,8 @@ describe('my-story page', () => {
     expect(body.startsWith('> **Content note')).toBe(true);
     const note = body.slice(0, body.indexOf('\n\n'));
     expect(note).toContain('13 11 14');
-    expect(note).toContain('1300 224 636');
+    expect(note).toContain('1300 22 4636');
+    expect(note).toContain('000');
     expect(note).toContain('Lifeline');
     expect(note).toContain('Beyond Blue');
   });
@@ -127,6 +128,19 @@ describe('my-story page', () => {
     expect(story).not.toMatch(
       /\byou should\b|\byou could try\b|\bworks? for everyone\b|\b(?:I['’]d |highly |I )?recommend\b|\bcured\b|\bworked for me\b|\bfixed my pain\b/i,
     );
+  });
+
+  it('omits the 2025 specialist entry, as Tim decided', () => {
+    expect(story).not.toMatch(/2025|specialist/i);
+  });
+
+  it('says he is back in a corporate role', () => {
+    expect(story).toMatch(/back in a corporate role/);
+  });
+
+  it('closes with specific next steps that exist on the site', () => {
+    expect(story).toContain('(/pain/understand)');
+    expect(story).toContain('(/get-involved)');
   });
 
   it('states the written date and yearly review', () => {
@@ -160,7 +174,7 @@ describe('story-and-consent page', () => {
 
   it('names the support lines', () => {
     expect(page).toContain('13 11 14');
-    expect(page).toContain('1300 224 636');
+    expect(page).toContain('1300 22 4636');
   });
 
   it('has no placeholder text', () => {

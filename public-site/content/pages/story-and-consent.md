@@ -22,7 +22,7 @@ Nothing you send through the [Get involved](/get-involved) form is published. If
 
 ## Support
 
-If a story brings up something difficult, you can call Lifeline on 13 11 14 or Beyond Blue on 1300 224 636.
+If a story brings up something difficult, you can call Lifeline on 13 11 14 or Beyond Blue on 1300 22 4636.
 
 ## Privacy
 

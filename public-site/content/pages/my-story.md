@@ -4,7 +4,7 @@ seo:
   description: "Tim's story of living with chronic pain, told to help others feel less alone and be better prepared to speak up."
 ---
 
-> **Content note:** this page mentions surgery, hospital and mental health themes. It is my experience only; everyone's pain and care are different. If you need support right now, you can call Lifeline on 13 11 14 or Beyond Blue on 1300 224 636.
+> **Content note:** this page mentions surgery, hospital and mental health themes. It is my experience only; everyone's pain and care are different. If you need support right now, you can call Lifeline on 13 11 14 or Beyond Blue on 1300 22 4636. If your life is in danger, call 000.
 
 ## My story
 
@@ -18,9 +18,9 @@ I've tried many things. Chinese medicine and yoga gave me short-term relief. Med
 
 I'm writing this recovering from injections and nerve treatments, and I don't yet know if they've helped. The pain is bad right now. That is part of the story too.
 
-I work in operational resilience in a corporate role: preparing for disruption and recovering when things go wrong. Being made redundant gave me time to step back and heal. Right now I'm focusing on advocacy and on helping others, alongside that work.
+My career is in operational resilience: preparing for disruption and recovering when things go wrong. Being made redundant gave me time to step back and heal, and I'm now back in a corporate role. Right now I'm focusing on advocacy and on helping others, alongside that work.
 
-If any of this sounds like you, you're not alone, and you're not doing it wrong. This site is for people who want to be heard, and to be better prepared to speak up.
+If any of this sounds like you, you're not alone, and you're not doing it wrong. This site is for people who want to be heard, and to be better prepared to speak up. If you're getting ready for an appointment, you can start with the [Persistent Pain Pathway](/pain/understand). If you'd like to share your experience or help out, [get involved](/get-involved).
 
 *Written November 2026. I review this page each year.*
 
@@ -33,7 +33,6 @@ This is what happened for me. It is not advice about what anyone else should do.
 - **2016:** the first of four spinal surgeries. It is stopped when spinal cord monitoring stops working and staff suspect a problem.
 - **The next surgeries:** the second deals with infections picked up in hospital, the third completes the implants, and in the fourth cement is used because the screws are coming loose. A 12-day stay in intensive care follows the extensive surgeries.
 - **Years later:** the implants break and are replaced. They can't be removed because of the cement. The wound takes months to heal.
-- **2025:** a new pain specialist suspects the vertebra below the fusion is affected. I have CT, bone scan and MRI tests.
 - **2026:** injections and nerve treatments. I don't yet know if they've helped.
 
 </details>
