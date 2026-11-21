@@ -10,6 +10,8 @@ const read = (slug: string) => readFileSync(path.join(root, 'content/pages', `${
 const namesOrDates =
   /\b[A-Z][\w'’]+(\s[A-Z][\w'’]+)*\s(Hospital|Clinic|Medical Centre|Health)\b|\bDr\.?\s[A-Z]|\b\d{1,2}\s+(January|February|March|April|May|June|July|August|September|October|November|December)\b/;
 const placeholders = /\[|TBD|your words|TODO/i;
+// Markdown links are fine; only bare brackets count as placeholders.
+const stripLinks = (text: string) => text.replace(/\[([^\]]*)\]\([^)]*\)/g, '$1');
 
 describe('my-story page', () => {
   const story = read('my-story');
@@ -22,8 +24,7 @@ describe('my-story page', () => {
   });
 
   it('has no placeholder text', () => {
-    const body = story.replace(/\]\([^)]*\)/g, ''); // ignore markdown link targets
-    expect(body.replace(/\[([^\]]*)\]/g, '$1')).not.toMatch(placeholders);
+    expect(stripLinks(story)).not.toMatch(placeholders);
   });
 
   it('names no employer, hospital or clinician and gives no exact dates', () => {
@@ -48,5 +49,43 @@ describe('my-story page', () => {
 
   it('contains no coaching language', () => {
     expect(story).not.toMatch(/\bcoach/i);
+  });
+});
+
+describe('story-and-consent page', () => {
+  const page = read('story-and-consent');
+
+  it('says visitor stories are not open yet', () => {
+    expect(page).toContain('Visitor stories are not open yet');
+  });
+
+  it('states the consent rules', () => {
+    for (const phrase of ['how you are identified', 'change your mind', 'fundraising', 'review']) {
+      expect(page, phrase).toContain(phrase);
+    }
+  });
+
+  it('names the support lines', () => {
+    expect(page).toContain('13 11 14');
+    expect(page).toContain('1300 224 636');
+  });
+
+  it('has no placeholder text', () => {
+    expect(stripLinks(page)).not.toMatch(placeholders);
+  });
+
+  it('names no employer, hospital or clinician', () => {
+    expect(page).not.toMatch(namesOrDates);
+  });
+
+  it('links to the privacy policy', () => {
+    expect(page).toContain('(/privacy-policy)');
+  });
+});
+
+describe('placeholder guard', () => {
+  it('still flags a bare bracketed placeholder and ignores real links', () => {
+    expect(stripLinks('see [this page](/x)')).not.toMatch(placeholders);
+    expect(stripLinks('[Your words: why advocacy]')).toMatch(placeholders);
   });
 });
