@@ -1,0 +1,98 @@
+# Pages CMS configuration (TRIAL) — blog posts for TJR Mind & Body.
+#
+# Pages CMS (https://pagescms.org) reads this file from the repo root, per
+# branch. Posts are the Markdown files in public-site/content/library, which
+# the website already renders at /library/<slug>.
+#
+# This is deliberately a short form. The previous editor had about twenty
+# fields (REVS lists, journey stages, icon families). Anything not shown here
+# is kept as-is when a post is saved (see settings.content.merge below).
+#
+# Not configured yet: standalone pages (About, My Story, ...). My Story uses an
+# expandable <details> block, which a rich-text editor may not preserve, so
+# pages stay edited through pull requests for now.
+#
+# NOTE: `main` is protected, so edits must be saved on a branch (not on main)
+# and merged through a pull request. Pages CMS has a branch selector.
+
+media:
+  input: public-site/public/uploads
+  output: /uploads
+  rename: safe
+
+settings:
+  content:
+    # Keep front-matter keys that this form does not show (seo.*, attachments,
+    # older fields) instead of deleting them when a post is saved.
+    merge: true
+  commit:
+    templates:
+      create: "content(create): {path}"
+      update: "content(update): {path}"
+      delete: "content(delete): {path}"
+      rename: "content(rename): {oldPath} -> {newPath}"
+
+content:
+  - name: posts
+    label: Blog posts
+    type: collection
+    path: public-site/content/library
+    filename: "{primary}.md"
+    format: yaml-frontmatter
+    view:
+      primary: title
+      fields: [title, date, draft]
+      sort: date
+      order: desc
+    fields:
+      - name: title
+        label: Title
+        type: string
+        required: true
+      - name: date
+        label: Date
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: draft
+        label: Draft
+        type: boolean
+        default: true
+        description: Drafts stay hidden from the public site until you turn this off.
+      - name: excerpt
+        label: Summary
+        type: text
+        required: true
+        description: One or two plain sentences, shown on cards, search results and social previews.
+      - name: tags
+        label: Tags
+        type: string
+        list: true
+      - name: featuredImage
+        label: Main image
+        type: image
+      - name: featuredImageAlt
+        label: Main image description
+        type: string
+        description: Describe the image for people who cannot see it.
+      - name: author
+        label: Author
+        type: string
+        default: Tim
+      - name: seo
+        label: Search and sharing
+        type: object
+        fields:
+          - name: description
+            label: Search description
+            type: text
+          - name: noindex
+            label: Hide from search engines
+            type: boolean
+            default: false
+      - name: body
+        label: Post
+        type: rich-text
+        options:
+          format: markdown

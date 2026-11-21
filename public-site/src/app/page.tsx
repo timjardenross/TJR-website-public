@@ -74,12 +74,17 @@ export default function HomePage() {
           </div>
 
           <div className="grid gap-2.5 rounded-[28px] border border-border bg-gradient-to-br from-navy to-teal p-6 text-white">
-            <div className="grid grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-[1.05fr_0.95fr] gap-2.5">
               <div className="relative aspect-[3/4] overflow-hidden rounded-[22px] border border-white/15">
-                <Image src="/images/founder/founder-portrait.jpg" alt="Tim seated in a reflective setting during a rebuilding stage" fill className="object-cover" sizes="(min-width: 1024px) 220px, 40vw" />
+                <Image src="/images/founder/founder-portrait.jpg" alt="Tim seated in a reflective setting during a rebuilding stage" fill className="object-cover" sizes="(min-width: 1024px) 260px, 40vw" />
               </div>
-              <div className="relative aspect-[3/4] overflow-hidden rounded-[22px] border border-white/15">
-                <Image src="/images/founder/founder-with-dog.jpg" alt="Tim in a relaxed moment with his dog" fill className="object-cover" sizes="(min-width: 1024px) 220px, 40vw" />
+              <div className="grid grid-rows-2 gap-2.5">
+                <div className="relative overflow-hidden rounded-[22px] border border-white/15">
+                  <Image src="/images/founder/founder-recovery.jpg" alt="Tim in hospital after surgery during a difficult stage of recovery" fill className="object-cover" sizes="(min-width: 1024px) 220px, 40vw" />
+                </div>
+                <div className="relative overflow-hidden rounded-[22px] border border-white/15">
+                  <Image src="/images/founder/founder-with-dog.jpg" alt="Tim in a relaxed moment with his dog" fill className="object-cover" sizes="(min-width: 1024px) 220px, 40vw" />
+                </div>
               </div>
             </div>
           </div>
