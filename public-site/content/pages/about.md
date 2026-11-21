@@ -24,8 +24,8 @@ You can read [my story](/my-story), and see [how stories are handled](/story-and
 
 ## What you will find here
 
-- **A practical guide for people living with persistent pain.** The [Persistent Pain Pathway](/pain/understand) helps you understand your pain, find the right help, manage your capacity, and prepare for flares.
-- **Tools for speaking up.** Over time, this site will add more help for preparing for appointments and being heard.
-- **Ways to take action.** Over time, you will be able to find simple ways to support awareness and advocacy.
+- **A practical guide for people living with persistent pain.** The [Persistent Pain Pathway](/pain/care) helps you find the right help, manage your capacity, and prepare for flares.
+- **Tools for speaking up.** [Speak up](/speak-up) helps you prepare for appointments and be heard.
+- **Ways to take action.** [Take action](/take-action) has simple ways to support awareness and advocacy.
 
 If you would like to share your experience, volunteer, or work together, [get involved](/get-involved).

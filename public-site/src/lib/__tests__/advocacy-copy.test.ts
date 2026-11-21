@@ -32,7 +32,7 @@ function read(file: string): string {
 }
 
 describe('advocacy copy guard', () => {
-  it.each(['src/app/coming-soon/page.tsx', 'src/app/pain/understand/understand-pain-page.tsx'])(
+  it.each(['src/app/coming-soon/page.tsx'])(
     '%s no longer shows the retired Mind. Body. Resilience. tagline',
     (file) => {
       expect(read(file)).not.toContain('Mind. Body. Resilience');
@@ -72,6 +72,20 @@ describe('advocacy copy guard', () => {
     expect(read('src/app/page.tsx')).toContain('href="/my-story"');
     expect(read('content/pages/about.md')).toContain('(/my-story)');
     expect(read('content/pages/about.md')).toContain('(/story-and-consent)');
+  });
+
+  it('homepage pillars link to Speak Up and Take Action and drop the "being added" wording', () => {
+    const home = read('src/app/page.tsx');
+    expect(home).toContain("href: '/speak-up'");
+    expect(home).toContain("href: '/take-action'");
+    expect(home).not.toMatch(/being added over time/i);
+  });
+
+  it('About links to Speak Up and Take Action and drops the "over time" promises', () => {
+    const about = read('content/pages/about.md');
+    expect(about).toContain('(/speak-up)');
+    expect(about).toContain('(/take-action)');
+    expect(about).not.toMatch(/Over time, this site will add|Over time, you will/);
   });
 
   it('states the positioning line in site.ts', () => {

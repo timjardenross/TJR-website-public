@@ -22,10 +22,15 @@ describe('redirects', () => {
     }
   });
 
+  it('sends the removed Understand Pain page to Find help, temporarily', async () => {
+    const table = await redirectTable();
+    expect(table.get('/pain/understand')).toMatchObject({ destination: '/pain/care', permanent: false });
+  });
+
   it('no redirect destination is a retired route', async () => {
     const table = await redirectTable();
     for (const rule of table.values()) {
-      expect(['/coaching', '/approach', '/lets-chat']).not.toContain(rule.destination);
+      expect(['/coaching', '/approach', '/lets-chat', '/pain/understand']).not.toContain(rule.destination);
     }
   });
 });

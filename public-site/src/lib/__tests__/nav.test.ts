@@ -43,7 +43,14 @@ describe('navigation', () => {
     expect(navLinks.some((link) => link.href === '/my-story')).toBe(true);
   });
 
-  it('keeps the pain pathway in the primary nav', () => {
-    expect(navLinks.some((link) => link.href === '/pain/understand')).toBe(true);
+  it('lists Speak Up and Take Action in the primary nav', () => {
+    for (const href of ['/speak-up', '/take-action']) {
+      expect(navLinks.some((link) => link.href === href), href).toBe(true);
+    }
+  });
+
+  it('does not link the removed Understand Pain page', () => {
+    expect(navLinks.some((link) => link.href === '/pain/understand')).toBe(false);
+    expect(navLinks.some((link) => /understand pain/i.test(link.label))).toBe(false);
   });
 });

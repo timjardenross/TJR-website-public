@@ -1,9 +1,8 @@
 const steps = [
-  ['01', 'Understand', '/pain/understand'],
-  ['02', 'Find help', '/pain/care'],
-  ['03', 'Capacity', '/pain/capacity'],
-  ['04', 'Flares', '/pain/flare'],
-  ['05', 'My Pain Plan', '/pain/plan'],
+  ['01', 'Find help', '/pain/care'],
+  ['02', 'Capacity', '/pain/capacity'],
+  ['03', 'Flares', '/pain/flare'],
+  ['04', 'My Pain Plan', '/pain/plan'],
 ] as const;
 
 export function PathwayGlobalNav() {

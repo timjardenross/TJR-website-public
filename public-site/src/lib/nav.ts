@@ -3,7 +3,8 @@ export type NavLink = { label: string; href: string };
 export const navLinks: readonly NavLink[] = [
   { label: 'About', href: '/about' },
   { label: 'My Story', href: '/my-story' },
-  { label: 'Understand Pain', href: '/pain/understand' },
+  { label: 'Speak Up', href: '/speak-up' },
+  { label: 'Take Action', href: '/take-action' },
 ];
 
 export const ctaLink: NavLink = { label: 'Get involved', href: '/get-involved' };
