@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { PathwayRail } from '@/components/pain/PathwayNavigation';
 
 const factors = [
   ['Body', 'Injury, illness, inflammation and physical conditions can contribute to pain.', '◈', 'blue'],
@@ -28,12 +29,9 @@ export default function UnderstandPainPage() {
   return (
     <main className="pain-page" id="top">
       <div className="pain-shell">
-        <aside className="pain-rail" aria-label="Guide sections">
-          <div className="rail-brand"><span className="brand-mark">✦</span><span>TJR<br /><b>Mind &amp; Body</b></span></div>
-          <div className="rail-line" />
-          <nav>{nav.map(([number, label, href]) => <a href={`#${href}`} key={href}><span>{number}</span>{label}</a>)}</nav>
-          <div className="rail-note">Living well with persistent pain<br /><b>— an Australian guide</b></div>
-        </aside>
+        <PathwayRail current={1}>
+          <nav aria-label="On this page" className="rail-sections">{nav.map(([number, label, href]) => <a href={`#${href}`} key={href}><span>{number}</span>{label}</a>)}</nav>
+        </PathwayRail>
 
         <div className="pain-content">
           <header className="pain-hero" id="start-here">

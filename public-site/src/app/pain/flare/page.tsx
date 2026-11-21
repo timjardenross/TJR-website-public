@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { PathwayRail } from '@/components/pain/PathwayNavigation';
 import { usePainProfile } from '@/components/pain/PainProfileProvider';
 import { buildPainOutput, type PainProfile } from '@/lib/pain-profile';
 
@@ -13,7 +14,7 @@ type FlareKey = (typeof prompts)[number][0];
 const displayPlanValue = (value: string | string[]) => Array.isArray(value) ? value.join(' · ') : value;
 
 function Nav() {
-  return <aside className="pain-rail" aria-label="Pathway navigation"><div className="rail-brand"><span className="brand-mark">✦</span><span>TJR<br /><b>Mind &amp; Body</b></span></div><div className="rail-line" /><nav><a href="/pain/understand"><span>01</span>Understand</a><a href="/pain/care"><span>02</span>Find help</a><a href="/pain/capacity"><span>03</span>Capacity</a><a href="#flare"><span>04</span>Flares</a><a href="/pain/plan"><span>05</span>My plan</a></nav></aside>;
+  return <PathwayRail current={4} />;
 }
 
 function FlareCard({ profile, onClose }: { profile: PainProfile; onClose: () => void }) {
