@@ -10,11 +10,11 @@
 
 **Spec:** `docs/superpowers/specs/2026-11-21-advocacy-pivot-design.md` (sections 7, 8 phase 2, 9). Phase 1 plan: `docs/superpowers/plans/2026-11-21-advocacy-phase-1-reposition.md`.
 
-**Source copy (kept outside the repo until Tim approves it):** `/tmp/claude-0/-home-user-TJR-website-public/a5dc5be2-a4a4-59ee-a156-e33290880878/scratchpad/my-story-copy.md`. If that file is gone, the source is Tim's approved 300-word draft in the session transcript plus his Google Doc "My Authentic Story". Never invent facts; stop and ask Tim.
+**Source copy (kept outside the repo; ask Tim or the session owner for it):** the story text approved by Tim as a starting point. If the source copy is unavailable, the source is Tim's approved 300-word draft in the session transcript plus his Google Doc "My Authentic Story". Never invent facts; stop and ask Tim.
 
 ## Global Constraints
 
-- Story facts come only from Tim's Google Doc and his stated answers (spec section 7). Tim's decisions: detailed level; "injections and nerve treatments"; "for most of my life"; location, ICU stay, years and redundancy may be public; employer never named.
+- Story facts come only from Tim's Google Doc and his stated answers (spec section 7). Tim's decisions are recorded in spec section 7: detailed level, his chosen wording for current treatments and duration, which identifying details may be public, and that the employer is never named.
 - Never name the employer, any hospital or any clinician. Years only, no exact dates. No treatment recommendations or ratings: therapies are described as "short-term relief" for Tim, never as what works.
 - Content note with Lifeline 13 11 14 and Beyond Blue 1300 224 636 at the top of the story page. Both numbers must be re-verified before launch (see Review Focus).
 - No placeholder text (`[`…`]`, "TBD", "your words") in any published page.
@@ -100,7 +100,7 @@ Changes: `navLinks` becomes About `/about`, My Story `/my-story`, Understand Pai
 
 - [ ] **Step 1: Confirm CI untouched:** `git diff origin/main -- .github/workflows/ci.yml` is empty and the job name is still `test-and-build`.
 - [ ] **Step 2: Run the CI commands locally:** `npm ci && npm run lint && npm test && npm run build`. Expected: exit 0.
-- [ ] **Step 3: Push the branch** (`claude/dazzling-albattani-h8huus`, restarted from `main`; its old history is already merged, so use `git push --force-with-lease`) and open a draft PR whose description lists the facts for Tim to confirm: (1) "Years later" for the implant failure; (2) the 2025 specialist and tests entry; (3) that the 12-day ICU stay followed the later surgeries; (4) the bridging paragraph about redundancy and focus; (5) that the closing line gives no specific ask yet; (6) the two support-line numbers.
+- [ ] **Step 3: Push the branch** (`claude/dazzling-albattani-h8huus`, restarted from `main`; its old history is already merged, so use `git push --force-with-lease`) and open a draft PR whose description lists, for Tim to confirm, the six open points recorded in the source copy (timing of one event, one 2025 entry, the order of two events, the bridging paragraph, the lack of a specific closing ask, and the two support-line numbers) plus anything the reviewer flagged.
 - [ ] **Step 4: Confirm `test-and-build` passes on the final PR head SHA** (read the check runs; not an earlier commit).
 - [ ] **Step 5: Stop for Tim.** Tim reads the story page on the preview and in the PR, confirms the six facts and says to merge. Mark ready only then.
 - [ ] **Step 6: Merge through the PR only** (never push to `main`, no bypass); then confirm the `main` push run of `test-and-build` passes.
