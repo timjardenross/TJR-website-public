@@ -44,3 +44,5 @@ body {
 @media (max-width:480px) { .hero-actions { align-items:flex-start; flex-direction:column; } .path-flow { gap:8px; } .path-flow i { font-size:16px; } .map-grid { grid-template-columns:1fr; } .factor-chip { font-size:11px; padding-right:10px; } .factor-wheel { transform:scale(.76); margin:-45px -55px; } }
 .pain-rail nav + nav { margin-top:22px; padding-top:18px; border-top:1px solid #bcd8d2; }
 .pain-rail nav a.current { color:var(--deep); font-weight:700; }
+
+@media print { body > header, body > footer, .skip-link { display: none !important; } }
