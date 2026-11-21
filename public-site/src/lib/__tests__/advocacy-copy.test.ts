@@ -88,6 +88,14 @@ describe('advocacy copy guard', () => {
     expect(about).not.toMatch(/Over time, this site will add|Over time, you will/);
   });
 
+  it('homepage shows all three founder photos, including the hospital recovery photo', () => {
+    const home = read('src/app/page.tsx');
+    for (const photo of ['founder-portrait.jpg', 'founder-recovery.jpg', 'founder-with-dog.jpg']) {
+      expect(home, photo).toContain(`/images/founder/${photo}`);
+    }
+    expect(home).toMatch(/alt="Tim in hospital after surgery/);
+  });
+
   it('states the positioning line in site.ts', () => {
     expect(read('src/lib/site.ts')).toContain(
       'Chronic pain awareness and advocacy: helping people be heard, and helping others understand.',
