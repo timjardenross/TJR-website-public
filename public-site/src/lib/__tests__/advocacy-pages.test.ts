@@ -138,4 +138,55 @@ describe('print styles', () => {
   });
 });
 
+// --- Task 2: facts and awareness month ---------------------------------------
+commonChecks('pain-facts');
+commonChecks('pain-awareness-month');
+
+describe('pain-facts page', () => {
+  const page = read('pain-facts');
+  const factsSection = page.split('## The facts')[1]?.split(/\n## /)[0] ?? '';
+  const bullets = factsSection.split('\n').filter((line) => line.startsWith('- '));
+
+  it('is dated and says estimates vary', () => {
+    expect(page).toContain('As at November 2026');
+    expect(page).toMatch(/Estimates vary/);
+  });
+  it('states the 4.2 million figure as Painaustralia\'s own', () => {
+    expect(page).toContain('4.2 million');
+    expect(page).toContain('Painaustralia');
+  });
+  it('gives every fact a source link to an allowed URL', () => {
+    expect(bullets.length).toBeGreaterThanOrEqual(3);
+    for (const bullet of bullets) {
+      const urls = externalLinks(bullet);
+      expect(bullet, bullet).toContain('Source: [');
+      expect(urls.length, bullet).toBeGreaterThan(0);
+      for (const url of urls) expect(ALLOWED_EXTERNAL.has(url), url).toBe(true);
+    }
+  });
+  it('cites the 31 August 2026 release for the 4.2 million figure', () => {
+    const line = bullets.find((b) => b.includes('4.2 million')) ?? '';
+    expect(line).toContain(RELEASE);
+    expect(line).toContain('31 August 2026');
+  });
+});
+
+describe('pain-awareness-month page', () => {
+  const page = read('pain-awareness-month');
+  it('names the 2026 campaign day and links the release', () => {
+    expect(page).toContain('1 September');
+    expect(page).toContain('2026');
+    expect(page).toContain(RELEASE);
+  });
+  it('hard-codes no date for a future year and says dates change', () => {
+    expect(page).not.toMatch(/\b\d{1,2}\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+20(2[7-9]|[3-9]\d)\b/);
+    expect(page).toMatch(/changes? (each|every|by) year|dates? change/i);
+  });
+  it('links the facts, Get involved and Painaustralia', () => {
+    expect(page).toContain('(/pain-facts)');
+    expect(page).toContain('(/get-involved)');
+    expect(page).toContain('https://www.painaustralia.org.au/');
+  });
+});
+
 export { RELEASE, read, externalLinks, internalLinks, knownRoutes, commonChecks, ALLOWED_EXTERNAL };
