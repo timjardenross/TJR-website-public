@@ -4,7 +4,7 @@
 
 Because this is a Git-based CMS with no external database:
 
-- **All content, media and configuration live in the `tjrmindbody_public` GitHub
+- **All content, media and configuration live in the `TJR-website-public` GitHub
   repository.** There is no separate content database to lose. As long as
   the GitHub repo exists, the entire content platform (every article,
   image, and CMS config) can be reconstructed.
@@ -40,19 +40,20 @@ git revert <bad-commit-sha>
 git push
 ```
 
-## Recovering the CMS login (GitHub OAuth App)
+## Cutting off or recovering Pages CMS access
 
-If the OAuth App's client secret is lost or compromised:
+Pages CMS reaches the repository through a GitHub app authorised on your account. If
+you lose a device, suspect a compromised account, or simply want to stop the editor
+working:
 
-1. GitHub → Developer settings → OAuth Apps → the app → **Generate a new
-   client secret**, revoke the old one.
-2. Update `GITHUB_OAUTH_CLIENT_SECRET` in the Vercel project's environment
-   variables.
-3. Redeploy (or wait for the next deploy — env var changes take effect on
-   the next build/runtime restart).
+1. GitHub → Settings → Applications. Open **Pages CMS** and **Revoke** it (or, under
+   installed apps, **Configure** it to narrow which repositories it can reach).
+2. To restore access, sign in again at `app.pagescms.org` and approve the permission
+   screen, installing it on `TJR-website-public` only.
 
-No content or media is affected by rotating OAuth credentials — it only
-gates who can log in to `/admin`.
+No content or media is affected: revoking access only stops edits through the editor.
+Protected `main` and the required `test-and-build` check still apply to anything that
+reaches the live site.
 
 ## Recovering uploaded media
 

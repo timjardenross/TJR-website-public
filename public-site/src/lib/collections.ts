@@ -36,7 +36,7 @@ export const collections: CollectionDef[] = [
     contentDir: 'library',
     isArticleType: true,
     description:
-      'REVS educational articles, guides, worksheets, visual explainers and practical resources for understanding human capacity.',
+      'Posts about living with persistent pain, speaking up, and taking action.',
     inSearch: true,
     inFeed: true,
     inSitemap: true,

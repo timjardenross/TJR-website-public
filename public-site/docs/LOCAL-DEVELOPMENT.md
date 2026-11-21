@@ -45,21 +45,12 @@ For page work, start from the `codex/coming-soon-preview` branch so the
 preview stays focused on the coming-soon workflow and does not pull in the
 broader in-progress site changes.
 
-## Working on the CMS editor locally
+## Trying the editor
 
-The `/admin` editor is fully static (loaded from a CDN) and will run at
-`http://localhost:3200/admin`, but the GitHub OAuth login flow requires the
-OAuth App's callback URL to match wherever `/api/auth` is reachable. For
-most local work this isn't necessary — edit Markdown files directly instead
-(see above). If you do need to test the live editor+auth flow locally,
-either:
-
-- Register a second GitHub OAuth App with callback URL
-  `http://localhost:3200/api/auth`, and set `GITHUB_OAUTH_CLIENT_ID` /
-  `GITHUB_OAUTH_CLIENT_SECRET` in `.env.local` to that app's credentials
-  (don't reuse the production OAuth App's secret locally); or
-- Test against a Vercel preview deployment instead, which already has a
-  real HTTPS URL.
+Pages CMS is a hosted app (`app.pagescms.org`), so there is nothing to run or
+configure locally and no environment variables are needed. For local work, edit the
+Markdown files directly (see above). To see how a change looks, use the Vercel preview
+deployment for your branch.
 
 ## Scripts
 

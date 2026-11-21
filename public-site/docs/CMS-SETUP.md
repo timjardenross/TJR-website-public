@@ -1,84 +1,71 @@
-# CMS Setup Guide — Sveltia CMS + GitHub OAuth
+# CMS Setup — Pages CMS
 
-This walks through connecting the `/admin` editor to GitHub for the first
-time. It's a one-time setup per deployment environment (do it once for
-production; repeat for a staging deployment if you add one).
+Blog posts are edited in [Pages CMS](https://pagescms.org), a free, open-source
+editor that works directly on the Markdown files in this repository. There is no
+separate content database and nothing to host or configure on the website itself:
+no login code, no secrets, no environment variables.
 
-## 1. Create a GitHub OAuth App
+## How it fits together
 
-1. GitHub → Settings → Developer settings → OAuth Apps → **New OAuth App**.
-2. **Application name**: `TJR Mind & Body CMS`
-3. **Homepage URL**: your production site URL (e.g. `https://www.tjrmindbody.com`)
-4. **Authorization callback URL**: `<site-url>/api/auth` — e.g.
-   `https://www.tjrmindbody.com/api/auth`. This must match exactly.
-5. Create the app, then generate a **Client secret**.
+- **The editor** is the hosted app at `app.pagescms.org`. You sign in with GitHub.
+- **The configuration** is one file, `.pages.yml`, at the repository root. Pages CMS
+  reads it from whichever branch you are editing, so changes to the form go through
+  a pull request like any other change.
+- **The content** is the Markdown files in `public-site/content/`. Posts live in
+  `public-site/content/library/` and appear on the site at `/library/<slug>`.
+- **Uploaded images** are committed to `public-site/public/uploads/` and served from
+  `/uploads/...`.
 
-## 2. Set environment variables
+## Connecting the repository
 
-In the Vercel project for `public-site/` (Project Settings → Environment
-Variables), set:
+1. Go to `app.pagescms.org` and sign in with GitHub.
+2. When Pages CMS asks for access, **check the permission screen** before you
+   approve. Pages CMS needs permission to read and write repository contents.
+   Install it on **this repository only** (`TJR-website-public`), not on all of
+   your repositories.
+3. Open the repository. Do **not** use the "create from a template" options; they
+   create a new, separate repository.
+4. Use the **branch selector** to pick the branch you are editing on.
 
-| Variable | Value |
-|---|---|
-| `GITHUB_OAUTH_CLIENT_ID` | the OAuth App's Client ID |
-| `GITHUB_OAUTH_CLIENT_SECRET` | the OAuth App's Client secret |
-| `NEXT_PUBLIC_SITE_URL` | the site's production URL, no trailing slash |
+You can review or narrow what Pages CMS can reach at any time in GitHub under
+Settings → Applications.
 
-Locally, copy `.env.example` to `.env.local` and fill in the same values if
-you want to test the `/admin` login flow on your machine (the OAuth App's
-callback URL would need to point at your tunnel/localhost for that — in
-practice it's easiest to just test auth against the deployed site).
+## Saving: branch first, then a pull request
 
-## 3. Point `config.yml` at the right domain
+`main` is protected. Pull requests are required, and the `test-and-build` check
+must pass before anything merges, so Pages CMS cannot save straight to `main`.
 
-`public/admin/config.yml` → `backend.base_url` must equal
-`NEXT_PUBLIC_SITE_URL`. It's a static file served to the browser, so it
-can't read the environment variable — update it by hand whenever the
-production domain changes:
+1. Edit on a branch (create one in the branch selector, or on GitHub).
+2. Pages CMS saves each change to that branch as a commit.
+3. When you are ready to publish, open a pull request from that branch into
+   `main` on GitHub. The checks run.
+4. Merge the pull request. The site rebuilds and deploys.
 
-```yaml
-backend:
-  name: github
-  repo: timjardenross/tjrmindbody_public
-  branch: main
-  base_url: https://www.tjrmindbody.com   # <- update this
-  auth_endpoint: api/auth
-```
+See `PUBLISHING-GUIDE.md` for the step-by-step version.
 
-## 4. How authentication works
+## What `.pages.yml` configures
 
-Sveltia CMS's GitHub backend opens a popup to `<base_url>/api/auth`. That
-route (`src/app/api/auth/route.ts`) is a self-hosted replacement for the
-OAuth broker Netlify used to provide for free via Identity/Git Gateway:
+- **Blog posts**: a short form (title, date, draft switch, summary, tags, main image
+  and description, author, search description, and a rich-text post) over
+  `public-site/content/library`. New posts start as drafts.
+- **Media**: uploads go to `public-site/public/uploads` and are written into posts as
+  `/uploads/...`.
+- **Keep unknown fields**: `settings.content.merge: true` keeps any front-matter fields
+  the form does not show, so saving a post never deletes them.
 
-1. **No `code` param** → redirects the popup to GitHub's OAuth authorize
-   screen (`scope=repo,read:user`), storing a CSRF `state` value in a short-lived
-   cookie.
-2. User approves access on GitHub → GitHub redirects back to
-   `/api/auth?code=...&state=...`.
-3. The route verifies `state`, exchanges `code` for an access token via
-   GitHub's token endpoint, and returns a small HTML page that performs the
-   standard Decap/Sveltia `postMessage` handshake
-   (`authorizing:github` → `authorization:github:success:{...}`) back to
-   the CMS window, which then closes the popup and is authenticated.
+## What is not in the editor
 
-No token is ever stored server-side — it's handed to the browser once and
-kept in memory by the CMS for the session, exactly as Netlify's own
-Identity/Git Gateway worked.
+Standalone pages (About, My Story and so on), Instagram highlights and the Discover
+Your Capacity access codes are not configured in Pages CMS. Edit those Markdown files
+through a pull request. Standalone pages are left out on purpose: My Story uses an
+expandable `<details>` block, which a rich-text editor may not preserve.
 
-## 5. Log in
-
-Visit `<site-url>/admin`, click **Login with GitHub**, approve the OAuth
-App. Anyone who authenticates this way authenticates *as themselves* against
-GitHub, so access control is just "who has write access to
-`timjardenross/tjrmindbody_public`" — no separate CMS user database exists.
-
-## 6. Adding a new content collection later
+## Adding a new content collection later
 
 1. Add an entry to `collections` in `src/lib/collections.ts`.
-2. Add a matching `- name: ...` block to `public/admin/config.yml` with its
-   `folder: "public-site/content/<key>"`.
-3. Create `content/<key>/` (an empty directory; Git won't track it until it
-   has a file — commit a real entry or a `.gitkeep`).
+2. Add a matching block under `content:` in `.pages.yml` with its
+   `path: public-site/content/<key>`.
+3. Create `content/<key>/` (Git will not track an empty folder, so commit a real
+   entry or a `.gitkeep`).
 
-No other code changes are required — see `ARCHITECTURE.md`.
+No other code changes are required. See `ARCHITECTURE.md`.
