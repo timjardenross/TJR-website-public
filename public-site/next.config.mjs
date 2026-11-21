@@ -14,6 +14,8 @@ const nextConfig = {
       { source: '/book-a-call', destination: '/get-involved', permanent: true },
       { source: '/approach', destination: '/about', permanent: true },
       { source: '/lets-chat', destination: '/get-involved', permanent: true },
+      // Understand Pain page removed for now; temporary so it can return.
+      { source: '/pain/understand', destination: '/pain/care', permanent: false },
       { source: '/blog', destination: '/library', permanent: true },
       { source: '/guides', destination: '/library', permanent: true },
       { source: '/revs-articles', destination: '/library', permanent: true },

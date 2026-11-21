@@ -6,7 +6,7 @@ seo:
 
 ## Before
 
-- Write your pain story in a few lines: where it is, what it feels like, when it started, what changes it, and what it affects. [Map your pain story](/pain/understand) walks you through it.
+- Write your pain story in a few lines: where it is, what it feels like, when it started, what changes it, and what it affects.
 - Decide what matters most to you for this appointment. One or two things is enough.
 - Write down your questions. [Healthdirect's questions to ask your doctor](https://www.healthdirect.gov.au/healthcare-and-services/general-health/questions-to-ask-your-doctor) is a good place to start, and [Find the right help](/pain/care) has more to hold in mind.
 - If it helps, bring someone with you, or bring your notes.

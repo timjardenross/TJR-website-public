@@ -1,3 +1,5 @@
+> **Update, 21 November 2026:** the Understand Your Pain page (`/pain/understand`) has been removed for now at Tim's request and redirects to Find help. The pathway currently has four steps: Find help, Manage your capacity, Prepare for flares and My Pain Plan. The page's code remains in git history. The description below is the original five-step prototype.
+
 # Persistent Pain Pathway Prototype
 
 ## What this prototype demonstrates

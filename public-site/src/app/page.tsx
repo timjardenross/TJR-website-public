@@ -6,12 +6,6 @@ import { LeadMagnetForm } from '@/components/LeadMagnetForm';
 
 const pillars = [
   {
-    title: 'Understand',
-    detail: 'A practical guide to persistent pain: what it is, who can help, and how to manage the capacity you have.',
-    href: '/pain/understand',
-    cta: 'Start the pathway',
-  },
-  {
     title: 'Speak up',
     detail: 'Prepare for appointments, put your pain story into words, and keep a plan for difficult days.',
     href: '/speak-up',
@@ -47,8 +41,8 @@ export default function HomePage() {
             Awareness and self-advocacy from lived experience, not medical advice.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Link href="/pain/understand" className="rounded-lg bg-navy px-6 py-3 text-sm font-semibold text-white hover:bg-navy-deep">
-              Understand your pain
+            <Link href="/speak-up" className="rounded-lg bg-navy px-6 py-3 text-sm font-semibold text-white hover:bg-navy-deep">
+              Prepare to speak up
             </Link>
             <Link href="/get-involved" className="rounded-lg border border-navy/20 bg-white px-6 py-3 text-sm font-semibold text-navy hover:border-teal">
               Get involved
@@ -93,12 +87,12 @@ export default function HomePage() {
 
         <section className="mt-10 rounded-[34px] border border-border bg-white/80">
           <div className="border-b border-border px-7 py-6">
-            <h2 className="font-serif text-2xl font-bold tracking-tight text-navy">Understand. Speak up. Take action.</h2>
+            <h2 className="font-serif text-2xl font-bold tracking-tight text-navy">Speak up. Take action.</h2>
             <p className="mt-2 text-ink-mid">
               Practical help for being heard, and simple ways to help others understand.
             </p>
           </div>
-          <div className="grid gap-4 p-6 sm:grid-cols-3">
+          <div className="grid gap-4 p-6 sm:grid-cols-2">
             {pillars.map((pillar) => (
               <div key={pillar.title} className="rounded-3xl border border-border bg-white p-5">
                 <h3 className="mb-2 font-serif text-lg font-bold text-navy">{pillar.title}</h3>
@@ -121,12 +115,12 @@ export default function HomePage() {
               <p className="mb-2 text-xs font-extrabold uppercase tracking-[0.14em] text-teal">Start somewhere steady</p>
               <h2 className="font-serif text-2xl font-bold tracking-tight">Choose the next useful step</h2>
               <p className="mt-2 text-white/75">
-                Work through the pathway, or get in touch if you want to share your experience, volunteer, or work together.
+                Prepare to speak up, or get in touch if you want to share your experience, volunteer, or work together.
               </p>
             </div>
             <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
-              <Link href="/pain/understand" className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-navy hover:bg-blue-pale">
-                Understand your pain
+              <Link href="/speak-up" className="rounded-lg bg-white px-5 py-3 text-center text-sm font-semibold text-navy hover:bg-blue-pale">
+                Speak up
               </Link>
               <Link href="/get-involved" className="rounded-lg border border-white/25 px-5 py-3 text-center text-sm font-semibold text-white hover:border-teal">
                 Get involved

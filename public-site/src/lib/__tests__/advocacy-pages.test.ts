@@ -137,7 +137,7 @@ commonChecks('how-to-be-heard');
 describe('speak-up hub', () => {
   const page = read('speak-up');
   it('links the Pathway tools and the appointment guide', () => {
-    for (const href of ['/pain/understand', '/pain/care', '/pain/capacity', '/pain/flare', '/pain/plan', '/how-to-be-heard']) {
+    for (const href of ['/pain/care', '/pain/capacity', '/pain/flare', '/pain/plan', '/how-to-be-heard']) {
       expect(page, href).toContain(`(${href})`);
     }
   });

@@ -20,7 +20,7 @@ I'm writing this recovering from injections and nerve treatments, and I don't ye
 
 My career is in operational resilience: preparing for disruption and recovering when things go wrong. Being made redundant gave me time to step back and heal, and I'm now back in a corporate role. Right now I'm focusing on advocacy and on helping others, alongside that work.
 
-If any of this sounds like you, you're not alone, and you're not doing it wrong. This site is for people who want to be heard, and to be better prepared to speak up. If you're getting ready for an appointment, you can start with the [Persistent Pain Pathway](/pain/understand). If you'd like to share your experience or help out, [get involved](/get-involved).
+If any of this sounds like you, you're not alone, and you're not doing it wrong. This site is for people who want to be heard, and to be better prepared to speak up. If you're getting ready for an appointment, you can start with the [Persistent Pain Pathway](/pain/care). If you'd like to share your experience or help out, [get involved](/get-involved).
 
 *Written November 2026. I review this page each year.*
 

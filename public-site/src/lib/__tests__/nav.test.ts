@@ -49,7 +49,8 @@ describe('navigation', () => {
     }
   });
 
-  it('keeps the pain pathway in the primary nav', () => {
-    expect(navLinks.some((link) => link.href === '/pain/understand')).toBe(true);
+  it('does not link the removed Understand Pain page', () => {
+    expect(navLinks.some((link) => link.href === '/pain/understand')).toBe(false);
+    expect(navLinks.some((link) => /understand pain/i.test(link.label))).toBe(false);
   });
 });

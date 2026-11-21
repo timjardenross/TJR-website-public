@@ -18,7 +18,6 @@ Read the full guide: [How to be heard in an appointment](/how-to-be-heard).
 
 ## Tools on this site
 
-- [Map your pain story](/pain/understand): put where, what, when and how pain affects you into words, not just a number.
 - [Find the right help](/pain/care): who can help with what, and questions worth holding in mind.
 - [Manage your capacity](/pain/capacity): think through what you can do on a good, a middling and a very hard day.
 - [Prepare for flares](/pain/flare): build a Flare Card for difficult pain days.

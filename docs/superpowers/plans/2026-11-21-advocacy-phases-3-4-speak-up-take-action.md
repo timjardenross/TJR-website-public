@@ -131,6 +131,10 @@ Changes: `navLinks` becomes About `/about`, My Story `/my-story`, Understand Pai
 - [ ] **Step 5: Stop for Tim's go-ahead.** Mark ready and merge through the PR only after Tim says to; then confirm the `main` push run of `test-and-build` passes.
 - [ ] **Step 6:** Do not edit branch protection.
 
+### Task 7 (added at Tim's request): remove the Understand Pain page for now
+
+Tim asked for the Understand Pain page (`/pain/understand`) to be removed from the site. Decisions (my calls unless noted): delete the route (its code stays in git history); redirect `/pain/understand` to `/pain/care` with a temporary (non-permanent) redirect so old links land somewhere and the page can return; the Pathway rail becomes four steps (Find help, Capacity, Flares, My Pain Plan, numbered 01 to 04) with each page's hero label matching its position; remove or repoint every link to the page (top menu, homepage hero and bottom buttons, homepage "Understand" card, Speak Up and appointment guide, About, My Story closing line, sitemap, in-page buttons on Capacity and My Pain Plan); update the Pathway layout description. Pinned by `src/__tests__/removed-understand-page.test.ts`, the redirects test and `PathwayNavigation.test.tsx`.
+
 ---
 
 ## Self-review

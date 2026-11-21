@@ -139,7 +139,7 @@ describe('my-story page', () => {
   });
 
   it('closes with specific next steps that exist on the site', () => {
-    expect(story).toContain('(/pain/understand)');
+    expect(story).toContain('(/pain/care)');
     expect(story).toContain('(/get-involved)');
   });
 

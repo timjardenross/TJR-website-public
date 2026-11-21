@@ -32,7 +32,7 @@ function read(file: string): string {
 }
 
 describe('advocacy copy guard', () => {
-  it.each(['src/app/coming-soon/page.tsx', 'src/app/pain/understand/understand-pain-page.tsx'])(
+  it.each(['src/app/coming-soon/page.tsx'])(
     '%s no longer shows the retired Mind. Body. Resilience. tagline',
     (file) => {
       expect(read(file)).not.toContain('Mind. Body. Resilience');
