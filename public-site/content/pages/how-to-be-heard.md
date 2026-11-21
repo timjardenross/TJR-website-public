@@ -8,7 +8,7 @@ seo:
 
 - Write your pain story in a few lines: where it is, what it feels like, when it started, what changes it, and what it affects. [Map your pain story](/pain/understand) walks you through it.
 - Decide what matters most to you for this appointment. One or two things is enough.
-- Write down your questions. [Healthdirect's questions to ask your doctor](https://www.healthdirect.gov.au/questions-to-ask-your-doctor) is a good place to start, and [Find the right help](/pain/care) has more to hold in mind.
+- Write down your questions. [Healthdirect's questions to ask your doctor](https://www.healthdirect.gov.au/healthcare-and-services/general-health/questions-to-ask-your-doctor) is a good place to start, and [Find the right help](/pain/care) has more to hold in mind.
 - If it helps, bring someone with you, or bring your notes.
 
 ## In the appointment
@@ -26,11 +26,11 @@ It is fine to say when you have not understood something. It is also fine to ask
 - Write down what was agreed, in your own words, while it is fresh.
 - Note what happens next, and who is responsible for it.
 - Book the follow-up, or note when to expect a review.
-- If something was missed, you can go back and ask. Giving feedback is one of your rights.
+- If something was missed, you can go back and ask. You also have the right to give feedback.
 
 ## Your rights
 
-The Australian Charter of Healthcare Rights includes partnership, information, and giving feedback. [Read the Charter](https://www.safetyandquality.gov.au/your-rights/understanding-your-healthcare-rights).
+The Australian Charter of Healthcare Rights includes partnership, information, and the right to give feedback. [Read the Charter](https://www.safetyandquality.gov.au/your-rights/understanding-your-healthcare-rights).
 
 ## From Tim
 

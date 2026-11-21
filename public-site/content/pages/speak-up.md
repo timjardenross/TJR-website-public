@@ -28,7 +28,7 @@ What you enter in these tools stays in your browser session. It is only saved on
 
 ## Your rights
 
-Whatever the appointment, you have healthcare rights in Australia. The Australian Charter of Healthcare Rights lists seven: access, safety, respect, partnership, information, privacy, and giving feedback. [Read the Charter and what it means for you](https://www.safetyandquality.gov.au/your-rights/understanding-your-healthcare-rights).
+Whatever the appointment, you have healthcare rights in Australia. The Australian Charter of Healthcare Rights lists seven: access, safety, respect, partnership, information, privacy, and the right to give feedback. [Read the Charter and what it means for you](https://www.safetyandquality.gov.au/your-rights/understanding-your-healthcare-rights).
 
 ## A clear boundary
 

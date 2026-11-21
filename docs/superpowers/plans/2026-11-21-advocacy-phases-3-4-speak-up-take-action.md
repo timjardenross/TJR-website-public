@@ -14,8 +14,8 @@
 
 Checked 21 Nov 2026 by reading the pages or search results:
 - Ask Share Know (Australian Commission on Safety and Quality in Health Care): `https://www.safetyandquality.gov.au/supporting-your-health-care/ask-share-know`. Its three steps are exactly: "Ask questions to help get the information you need", "Share what matters to you", "Know your options".
-- Australian Charter of Healthcare Rights (same Commission): `https://www.safetyandquality.gov.au/your-rights/understanding-your-healthcare-rights`. Seven rights: access, safety, respect, partnership, information, privacy, giving feedback.
-- Healthdirect, questions to ask your doctor: `https://www.healthdirect.gov.au/questions-to-ask-your-doctor`.
+- Australian Charter of Healthcare Rights (same Commission): `https://www.safetyandquality.gov.au/your-rights/understanding-your-healthcare-rights`. Seven rights, as labelled on that page: Access, Safety, Respect, Partnership, Information, Privacy, Give feedback.
+- Healthdirect, questions to ask your doctor: `https://www.healthdirect.gov.au/healthcare-and-services/general-health/questions-to-ask-your-doctor` (the short `/questions-to-ask-your-doctor` address redirects here).
 - Find your federal MP (Parliament of Australia): `https://www.aph.gov.au/Senators_and_Members/Parliamentarian_Search_Results`.
 - Department of Health consultation hub: `https://consultations.health.gov.au/`.
 - National Strategic Action Plan for Pain Management (Department of Health): `https://www.health.gov.au/resources/publications/the-national-strategic-action-plan-for-pain-management`.

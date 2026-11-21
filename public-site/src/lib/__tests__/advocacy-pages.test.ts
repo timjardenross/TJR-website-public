@@ -10,7 +10,7 @@ const read = (slug: string) => readFileSync(path.join(root, 'content/pages', `${
 const ALLOWED_EXTERNAL = new Set([
   'https://www.safetyandquality.gov.au/supporting-your-health-care/ask-share-know',
   'https://www.safetyandquality.gov.au/your-rights/understanding-your-healthcare-rights',
-  'https://www.healthdirect.gov.au/questions-to-ask-your-doctor',
+  'https://www.healthdirect.gov.au/healthcare-and-services/general-health/questions-to-ask-your-doctor',
   'https://www.aph.gov.au/Senators_and_Members/Parliamentarian_Search_Results',
   'https://consultations.health.gov.au/',
   'https://www.health.gov.au/resources/publications/the-national-strategic-action-plan-for-pain-management',
@@ -75,7 +75,7 @@ describe('medicine-advice guard (self-test)', () => {
   });
 });
 
-const CHARTER_RIGHTS = ['access', 'safety', 'respect', 'partnership', 'information', 'privacy', 'giving feedback'];
+const CHARTER_RIGHTS = ['access', 'safety', 'respect', 'partnership', 'information', 'privacy', 'give feedback'];
 
 // --- Task 1: Speak Up ------------------------------------------------------
 commonChecks('speak-up');
@@ -107,11 +107,11 @@ describe('how-to-be-heard guide', () => {
   });
   it('covers before, during and after, and the right to give feedback', () => {
     for (const heading of ['## Before', '## In the appointment', '## After']) expect(page).toContain(heading);
-    expect(page.toLowerCase()).toContain('giving feedback');
+    expect(page.toLowerCase()).toContain('give feedback');
   });
   it('links the story and the Healthdirect questions', () => {
     expect(page).toContain('(/my-story)');
-    expect(page).toContain('https://www.healthdirect.gov.au/questions-to-ask-your-doctor');
+    expect(page).toContain('https://www.healthdirect.gov.au/healthcare-and-services/general-health/questions-to-ask-your-doctor');
   });
 });
 
