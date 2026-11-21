@@ -39,7 +39,7 @@ export function LeadMagnetForm() {
           Stay Connected
         </h2>
         <p className="text-ink-mid mb-6">
-          Get updates on new coaching resources, insights, and rebuilding strategies delivered to your inbox.
+          Get occasional updates on chronic pain awareness, self-advocacy tools, and ways to take action, delivered to your inbox.
         </p>
 
         {status === 'success' ? (

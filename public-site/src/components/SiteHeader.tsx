@@ -1,12 +1,6 @@
 import Link from 'next/link';
 import { site } from '@/lib/site';
-
-const navLinks = [
-  { label: 'About', href: '/about' },
-  { label: 'Approach', href: '/approach' },
-  { label: 'Library', href: '/library' },
-  { label: 'Pain Pathway', href: '/pain/understand' },
-];
+import { ctaLink, navLinks } from '@/lib/nav';
 
 export function SiteHeader() {
   return (
@@ -23,10 +17,10 @@ export function SiteHeader() {
           ))}
         </nav>
         <Link
-          href="/lets-chat"
+          href={ctaLink.href}
           className="rounded-md bg-navy px-4 py-2 text-sm font-medium text-white hover:bg-navy-deep"
         >
-          Let&apos;s Chat
+          {ctaLink.label}
         </Link>
       </div>
     </header>

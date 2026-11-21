@@ -10,8 +10,10 @@ const nextConfig = {
     return [
       { source: '/about-me', destination: '/about', permanent: true },
       { source: '/tjrs-blog', destination: '/library', permanent: true },
-      { source: '/what-is-coaching', destination: '/coaching', permanent: true },
-      { source: '/book-a-call', destination: '/lets-chat', permanent: true },
+      { source: '/what-is-coaching', destination: '/about', permanent: true },
+      { source: '/book-a-call', destination: '/get-involved', permanent: true },
+      { source: '/approach', destination: '/about', permanent: true },
+      { source: '/lets-chat', destination: '/get-involved', permanent: true },
       { source: '/blog', destination: '/library', permanent: true },
       { source: '/guides', destination: '/library', permanent: true },
       { source: '/revs-articles', destination: '/library', permanent: true },

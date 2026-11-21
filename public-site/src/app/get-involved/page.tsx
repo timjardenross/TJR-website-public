@@ -1,11 +1,11 @@
 import { ContactForm } from '@/components/ContactForm';
 
 export const metadata = {
-  title: "Let's Chat",
-  description: 'Contact TJR Mind & Body to enquire about support, coaching, education, or a discovery conversation.',
+  title: 'Get involved',
+  description: 'Share your experience, volunteer, or collaborate on chronic pain awareness and advocacy.',
 };
 
-export default function LetsChat() {
+export default function GetInvolved() {
   return (
     <div className="mx-auto max-w-5xl px-4 py-16">
       <ContactForm />
@@ -13,7 +13,7 @@ export default function LetsChat() {
       <div className="mt-16 rounded-[34px] border border-border bg-white/80 p-8">
         <h2 className="mb-4 font-serif text-2xl font-bold text-navy">Connect on social</h2>
         <p className="mb-6 text-ink-mid">
-          Follow for updates, insights, and rebuilding strategies on Instagram.
+          Follow for updates, stories, and ways to take action on Instagram.
         </p>
         <a
           href="https://instagram.com/tjrmindbody"
@@ -30,8 +30,7 @@ export default function LetsChat() {
 
       <div className="mt-6 rounded-[34px] border border-border bg-white/80 p-8">
         <p className="text-sm text-ink-mid">
-          This work is about practical resilience, self-management, and support. It is educational and coaching-based,
-          and it is not a substitute for medical advice, diagnosis, or treatment.
+          This is an individual voice, not an official body or a substitute for medical advice, diagnosis, or treatment.
         </p>
       </div>
     </div>

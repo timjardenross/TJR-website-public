@@ -7,7 +7,7 @@ export const SITE_LAUNCH_DATE = new Date('2026-07-10T00:00:00Z');
 export const site = {
   name: 'TJR Mind & Body',
   tagline:
-    'Practical resilience coaching and education for people navigating pressure, burnout, chronic pain, disruption, and steady rebuilding.',
+    'Chronic pain awareness and advocacy: helping people be heard, and helping others understand.',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3200',
   locale: 'en-GB',
   twitter: '@tjrmindbody',

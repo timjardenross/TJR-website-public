@@ -52,5 +52,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // prototype is also intentionally excluded. Category/tag/pagination pages
   // are likewise excluded as thin/duplicate listing views.
   const pathwayRoutes: MetadataRoute.Sitemap = ['/pain/understand', '/pain/care', '/pain/capacity', '/pain/flare', '/pain/plan'].map((path) => ({ url: absoluteUrl(path), lastModified: SITE_LAUNCH_DATE }));
-  return [...homeRoute, ...collectionIndexRoutes, ...entryRoutes, ...pageRoutes, ...pathwayRoutes];
+  // /get-involved is a code-owned route (it renders the contact form), so it has no markdown page.
+  const codeRoutes: MetadataRoute.Sitemap = [{ url: absoluteUrl('/get-involved'), lastModified: SITE_LAUNCH_DATE }];
+  return [...homeRoute, ...collectionIndexRoutes, ...entryRoutes, ...pageRoutes, ...codeRoutes, ...pathwayRoutes];
 }
