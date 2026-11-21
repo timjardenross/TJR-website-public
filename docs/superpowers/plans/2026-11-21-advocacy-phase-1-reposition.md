@@ -22,6 +22,7 @@
 - Retired routes redirect, never 404. Off-mission code (`/discover-your-capacity`, `products/groundwork-planner`, the climate download) is unlinked, not deleted.
 - Australian English, plain language, tone of the existing Pathway.
 - All copy is a draft for Tim to review in the PR before merge.
+- CI and branch protection (audit finding closed 21 Nov 2026; preserve it): keep `.github/workflows/ci.yml` and the required job/check name `test-and-build`; never rename it without updating branch protection; never disable or bypass the check; never push directly to `main`; never weaken protection (strict required checks, admin enforcement, no force pushes, no branch deletion, PR workflow). If dependencies, scripts, paths or build commands change, update CI in the same PR.
 
 ## Review Focus
 
@@ -145,6 +146,22 @@ Copy decisions (wording is my call; Tim reviews in the PR):
 - [ ] **Step 3: Run** `npm run lint && npm test && npm run build`. Expected: all PASS.
 - [ ] **Step 4: Check the Vercel preview** for the branch: `/`, `/about`, `/get-involved`, `/pain/understand`, `/pain/care`, `/pain/capacity`, `/pain/flare`, `/pain/plan` each load with the new menu and no coaching language. Redirects: `/approach` and `/lets-chat` land on live pages. Note anything off in the PR for Tim.
 - [ ] **Step 5: Commit** (only if files changed) `git commit -am "chore: unlink off-mission tools from public pages"`, then push and update PR #6 with a summary and the copy for Tim to review.
+
+### Task 7: CI and branch-protection handoff (runs after Task 6 and the final review)
+
+**Files:** none expected. `.github/workflows/ci.yml` must stay unchanged unless a script, path, dependency or build command changed (none in phase 1; the only tooling change is `esbuild.jsx` in `vitest.config.mts`, which CI's `npm test` already covers).
+
+**Verified state as of 21 Nov 2026 (from Tim):** CI runs on pull requests and pushes to `main`; required check is `test-and-build`; `main` is protected (strict required checks, admin enforcement, no force pushes, no branch deletion, PR workflow); latest `main` run passed ("ci: test and build the public site (#4)"); CI has passed on `claude/dazzling-albattani-h8huus`.
+
+- [ ] **Step 1: Confirm CI is untouched.** Run `git diff origin/main -- .github/workflows/ci.yml`. Expected: empty. Confirm the job id/name in the file is still `test-and-build`.
+- [ ] **Step 2: Run the CI commands locally** from `public-site/`: `npm ci && npm run lint && npm test && npm run build`. Expected: all exit 0.
+- [ ] **Step 3: Confirm the check on the final PR head.** After the last push, read PR #6's check runs and confirm `test-and-build` is completed and successful on the head SHA of the final commit (not an earlier commit). If it failed, fix the root cause; never skip or disable the check.
+- [ ] **Step 4: Stop for Tim's approval to merge.** Tim reviews the draft copy in PR #6 (homepage, About, forms, footer, policy pages) and the personal details in the design doc, and says to merge. Mark the PR ready for review first if it is still a draft.
+- [ ] **Step 5: Merge through the pull request only**, never a direct push to `main`. Do not use any admin bypass.
+- [ ] **Step 6: Confirm the merged `main` workflow passed** (the push-to-`main` run of `test-and-build`). Expected: success.
+- [ ] **Step 7: Confirm protection is intact.** Do not edit protection settings. If the tools available cannot read branch protection, say so and ask Tim to confirm in repo settings that: required check `test-and-build` (strict), admin enforcement, force pushes disabled, branch deletion disabled, PR workflow all remain on.
+
+Acceptance: the final PR commit has a passing `test-and-build`; tests and production build both pass; `main` remains protected with force pushes and branch deletion disabled; the merged `main` workflow passes.
 
 ---
 
