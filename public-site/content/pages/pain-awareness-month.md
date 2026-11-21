@@ -6,7 +6,7 @@ seo:
 
 ## September
 
-September is International Pain Awareness Month. In Australia, Painaustralia, the national peak body for pain, runs the Wear Red for Pain campaign. In 2026 it was on 1 September. The day changes each year, so check [Painaustralia](https://www.painaustralia.org.au/) for the current date.
+September is International Pain Awareness Month. In Australia, Painaustralia, the national peak body for pain, runs the Wear Red for Pain campaign. In 2026 it was on 1 September. Check [Painaustralia](https://www.painaustralia.org.au/) for this year's date and details.
 
 ## How to take part
 

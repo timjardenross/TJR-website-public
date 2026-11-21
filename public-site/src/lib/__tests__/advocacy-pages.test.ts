@@ -19,6 +19,20 @@ const ALLOWED_EXTERNAL = new Set([
 ]);
 const RELEASE = 'https://www.painaustralia.org.au/media/mr-2026/the-pain-you-cant-see';
 
+// Every link target on a page: markdown links (with or without a title) and raw href attributes.
+const linkTargets = (text: string) => [
+  ...[...text.matchAll(/\]\(\s*([^)\s]+)/g)].map((m) => m[1]),
+  ...[...text.matchAll(/href=["']([^"']+)["']/gi)].map((m) => m[1]),
+];
+
+// A line with a figure must carry an allow-listed source link on the same line.
+const FIGURE = /\d[\d.,]*\s*(?:million|billion|%|per cent)|\b\d+\s+in\s+\d+\b/i;
+const unsourcedFigureLines = (text: string) =>
+  text
+    .split('\n')
+    .filter((line) => FIGURE.test(line))
+    .filter((line) => !externalLinks(line).some((url) => ALLOWED_EXTERNAL.has(url)));
+
 const externalLinks = (text: string) => [...text.matchAll(/https?:\/\/[^\s)>\]]+/g)].map((m) => m[0]);
 const internalLinks = (text: string) =>
   [...text.matchAll(/\]\((\/[^)\s#]*)(?:#[^)]*)?\)/g)].map((m) => m[1]);
@@ -58,6 +72,17 @@ function commonChecks(slug: string) {
       const routes = knownRoutes();
       for (const href of internalLinks(page)) expect(routes.has(href), href).toBe(true);
     });
+    it('every link target is an allowed URL or a known route', () => {
+      const routes = knownRoutes();
+      for (const target of linkTargets(page)) {
+        const route = target.split('#')[0];
+        const ok = ALLOWED_EXTERNAL.has(target) || (route.startsWith('/') && routes.has(route));
+        expect(ok, target).toBe(true);
+      }
+    });
+    it('puts a source link on every line that states a figure', () => {
+      expect(unsourcedFigureLines(page)).toEqual([]);
+    });
     it('has no coaching language, cure promises or medicine-change advice', () => {
       expect(page).not.toMatch(/\bcoach/i);
       expect(page).not.toMatch(/\b(cure|guarantee)/i);
@@ -65,6 +90,34 @@ function commonChecks(slug: string) {
     });
   });
 }
+
+describe('link and figure guards (self-test)', () => {
+  const bad = [
+    '[x](www.example.com/a)',
+    '[x](HTTPS://evil.example)',
+    '[x](mailto:a@b.c)',
+    '[x](nope)',
+    '<a href="/nope">x</a>',
+    '[x](/nope "title")',
+  ];
+  it.each(bad)('flags link form %s', (text) => {
+    const routes = knownRoutes();
+    const flagged = linkTargets(text).some((t) => !(ALLOWED_EXTERNAL.has(t) || (t.startsWith('/') && routes.has(t.split('#')[0]))));
+    expect(flagged).toBe(true);
+  });
+  it('allows known routes and allowed URLs', () => {
+    const routes = knownRoutes();
+    for (const t of linkTargets('[a](/speak-up) [b](https://www.painaustralia.org.au/)')) {
+      expect(ALLOWED_EXTERNAL.has(t) || routes.has(t)).toBe(true);
+    }
+  });
+  it.each(['1 in 5 Australians', '4.2 million adults', 'about 30% of people', '3 per cent'])('flags unsourced figure: %s', (t) => {
+    expect(unsourcedFigureLines(t).length).toBe(1);
+  });
+  it('accepts a figure with an allowed source on the same line', () => {
+    expect(unsourcedFigureLines('4.2 million adults ([source](https://www.painaustralia.org.au/))')).toEqual([]);
+  });
+});
 
 describe('medicine-advice guard (self-test)', () => {
   it.each(['stop taking your medication', 'increase your opioids', 'start your medicine'])('flags %s', (t) => {
@@ -115,16 +168,33 @@ describe('how-to-be-heard guide', () => {
   });
 });
 
-// A `header` selector that starts a rule or follows a comma, i.e. not scoped with `body >`.
-const BARE_HEADER = /(^|[,{]\s*)header\s*[,{]/;
+// Every selector in the print block must be one of these. A broader or different selector
+// (for example `body header`, `main header`, `*`) could hide Pathway page content.
+const PRINT_ALLOWED = new Set(['body > header', 'body > footer', '.skip-link']);
+function printSelectors(css: string): string[] {
+  const start = css.indexOf('@media print');
+  if (start === -1) return [];
+  const block = css.slice(start);
+  const inner = block.slice(block.indexOf('{') + 1);
+  return [...inner.matchAll(/([^{}]+)\{[^}]*\}/g)].flatMap((m) => m[1].split(',').map((sel) => sel.trim())).filter(Boolean);
+}
+const printIsSafe = (css: string) => {
+  const selectors = printSelectors(css);
+  return selectors.length > 0 && selectors.every((sel) => PRINT_ALLOWED.has(sel));
+};
 
-describe('bare header guard (self-test)', () => {
-  it('flags unscoped header rules', () => {
-    expect(BARE_HEADER.test('@media print { header { display:none } }')).toBe(true);
-    expect(BARE_HEADER.test('@media print { footer, header { display:none } }')).toBe(true);
+describe('print guard (self-test)', () => {
+  it.each([
+    '@media print { body header { display:none } }',
+    '@media print { main header { display:none } }',
+    '@media print { .x{ color:red } header { display:none } }',
+    '@media print { * { display:none } }',
+    '@media print { .pain-hero { display:none } }',
+  ])('flags %s', (css) => {
+    expect(printIsSafe(css)).toBe(false);
   });
-  it('allows the scoped selector', () => {
-    expect(BARE_HEADER.test('@media print { body > header, body > footer { display:none } }')).toBe(false);
+  it('allows the scoped selectors', () => {
+    expect(printIsSafe('@media print { body > header, body > footer, .skip-link { display:none } }')).toBe(true);
   });
 });
 
@@ -132,9 +202,8 @@ describe('print styles', () => {
   const css = readFileSync(path.join(root, 'src/app/globals.css'), 'utf8');
   it('hide only the site header, footer and skip link when printing', () => {
     expect(css).toContain('@media print');
-    const print = css.slice(css.indexOf('@media print'));
-    for (const selector of ['body > header', 'body > footer', '.skip-link']) expect(print).toContain(selector);
-    expect(print).not.toMatch(BARE_HEADER); // a bare `header` rule would hide Pathway page content
+    expect(printIsSafe(css)).toBe(true);
+    expect(printSelectors(css).sort()).toEqual([...PRINT_ALLOWED].sort());
   });
 });
 
@@ -180,7 +249,8 @@ describe('pain-awareness-month page', () => {
   });
   it('hard-codes no date for a future year and says dates change', () => {
     expect(page).not.toMatch(/\b\d{1,2}\s+(January|February|March|April|May|June|July|August|September|October|November|December)\s+20(2[7-9]|[3-9]\d)\b/);
-    expect(page).toMatch(/changes? (each|every|by) year|dates? change/i);
+    expect(page).not.toMatch(/changes? (each|every) year|dates? change/i); // the release does not say the day moves
+    expect(page).toMatch(/Check .*Painaustralia.* for (this year's|the current) date/i);
   });
   it('links the facts, Get involved and Painaustralia', () => {
     expect(page).toContain('(/pain-facts)');
@@ -205,6 +275,30 @@ describe('take-action hub', () => {
   });
 });
 
+// First-person statements about the writer's own health. "I am writing" / "I am asking" are fine.
+const FIRST_PERSON_HEALTH =
+  /\bI(?:'m|'ve|\u2019m|\u2019ve| was| suffer| take| live| lived| living| have| had)\b|\bI am (?!writing\b|asking\b)|\bmy (?:pain|condition|diagnosis|surgery|surgeries|medication|medicines?)\b/i;
+
+describe('first-person health guard (self-test)', () => {
+  it.each([
+    'I am living with chronic pain',
+    "I've lived with pain for 20 years",
+    'I suffer from scoliosis',
+    'I was diagnosed with something',
+    'My pain began when I was 12',
+    'I take opioids every day',
+    "I'm in pain every day",
+  ])('flags %s', (text) => {
+    expect(FIRST_PERSON_HEALTH.test(text)).toBe(true);
+  });
+  it.each(['I am writing as a constituent in a suburb', 'I am asking you to support research', 'I would welcome a reply'])(
+    'allows %s',
+    (text) => {
+      expect(FIRST_PERSON_HEALTH.test(text)).toBe(false);
+    },
+  );
+});
+
 // Bracketed fill-ins that are not markdown links.
 const fillIns = (text: string) => [...text.matchAll(/\[[a-z][^\]]*\](?!\()/gi)].map((m) => m[0]);
 
@@ -216,8 +310,8 @@ describe.each(['letter-to-your-mp', 'consultation-submission'])('%s template', (
     expect(fillIns(template).length).toBeGreaterThanOrEqual(3);
   });
   it('makes no first-person health claims outside fill-ins', () => {
-    const withoutFillIns = template.replace(/\[[^\]]*\]/g, '');
-    expect(withoutFillIns).not.toMatch(/\bI (have|had|live with)\b/i);
+    const withoutFillIns = page.replace(/\[[^\]]*\]/g, '');
+    expect(withoutFillIns).not.toMatch(FIRST_PERSON_HEALTH);
   });
 });
 
