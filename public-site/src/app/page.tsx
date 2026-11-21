@@ -14,12 +14,14 @@ const pillars = [
   {
     title: 'Speak up',
     detail: 'Prepare for appointments, put your pain story into words, and keep a plan for difficult days.',
-    href: '/pain/plan',
-    cta: 'Build your plan',
+    href: '/speak-up',
+    cta: 'Prepare to be heard',
   },
   {
     title: 'Take action',
-    detail: 'Simple ways to support awareness and advocacy. These are being added over time.',
+    detail: 'Write to your MP, share the facts, and join Pain Awareness Month.',
+    href: '/take-action',
+    cta: 'See ways to help',
   },
 ];
 

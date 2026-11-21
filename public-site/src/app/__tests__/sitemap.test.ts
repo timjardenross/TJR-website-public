@@ -22,6 +22,13 @@ describe('sitemap', () => {
     expect(urls).toContain(`${site.url}/story-and-consent`);
   });
 
+  it('includes the Speak Up and Take Action pages', () => {
+    const urls = entries.map((e) => e.url);
+    for (const slug of ['speak-up', 'how-to-be-heard', 'take-action', 'letter-to-your-mp', 'consultation-submission', 'pain-facts', 'pain-awareness-month']) {
+      expect(urls, slug).toContain(`${site.url}/${slug}`);
+    }
+  });
+
   it('excludes the internal search page', () => {
     const urls = entries.map((e) => e.url);
     expect(urls).not.toContain(`${site.url}/search`);
