@@ -189,4 +189,60 @@ describe('pain-awareness-month page', () => {
   });
 });
 
+// --- Task 3: Take Action hub and templates -----------------------------------
+commonChecks('take-action');
+commonChecks('letter-to-your-mp');
+commonChecks('consultation-submission');
+
+describe('take-action hub', () => {
+  const page = read('take-action');
+  it('links the four ways to help and credits Painaustralia', () => {
+    for (const href of ['/letter-to-your-mp', '/consultation-submission', '/pain-facts', '/pain-awareness-month']) {
+      expect(page, href).toContain(`(${href})`);
+    }
+    expect(page).toContain('https://www.painaustralia.org.au/');
+    expect(page).toMatch(/does not speak for Painaustralia/);
+  });
+});
+
+// Bracketed fill-ins that are not markdown links.
+const fillIns = (text: string) => [...text.matchAll(/\[[a-z][^\]]*\](?!\()/gi)].map((m) => m[0]);
+
+describe.each(['letter-to-your-mp', 'consultation-submission'])('%s template', (slug) => {
+  const page = read(slug);
+  const template = page.split(/^## Template$/m)[1] ?? '';
+  it('has a Template section with bracketed fill-ins', () => {
+    expect(page).toMatch(/^## Template$/m);
+    expect(fillIns(template).length).toBeGreaterThanOrEqual(3);
+  });
+  it('makes no first-person health claims outside fill-ins', () => {
+    const withoutFillIns = template.replace(/\[[^\]]*\]/g, '');
+    expect(withoutFillIns).not.toMatch(/\bI (have|had|live with)\b/i);
+  });
+});
+
+describe('letter-to-your-mp page', () => {
+  const page = read('letter-to-your-mp');
+  it('links the MP search and cites the 4.2 million figure to Painaustralia', () => {
+    expect(page).toContain('https://www.aph.gov.au/Senators_and_Members/Parliamentarian_Search_Results');
+    expect(page).toContain('4.2 million');
+    expect(page).toContain(RELEASE);
+    expect(page).toContain('Painaustralia');
+  });
+  it('asks for the three things and for a reply', () => {
+    expect(page.toLowerCase()).toContain('multidisciplinary pain care');
+    expect(page.toLowerCase()).toContain('awareness');
+    expect(page.toLowerCase()).toContain('research');
+    expect(page).toMatch(/reply|meeting/i);
+  });
+});
+
+describe('consultation-submission page', () => {
+  it('links the consultation hub and covers publication preference', () => {
+    const page = read('consultation-submission');
+    expect(page).toContain('https://consultations.health.gov.au/');
+    expect(page).toMatch(/published/i);
+  });
+});
+
 export { RELEASE, read, externalLinks, internalLinks, knownRoutes, commonChecks, ALLOWED_EXTERNAL };
